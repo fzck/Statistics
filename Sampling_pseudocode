@@ -1,0 +1,14 @@
+// Sampling Techniques
+
+-- MENU --
+1. SIMPLE RANDOM SAMPLING
+2. SYSTEMATIC SAMPLING
+3. STRATIFIED SAMPLING
+4. QUIT
+
+while user does not enter QUIT,execute program, 
+program only exits iff user chooses quit
+
+if user chooses 1
+  1. get input POPULATION
+  2. get sampling frame
