@@ -5,7 +5,7 @@
  */
 package sampling1;
 
-import java.util.Scanner;
+import java.util.*;
 
 
 /**
@@ -27,13 +27,14 @@ public class Sampling1 {
         System.out.println("[4] EXIT");
         
         Scanner sc = new Scanner(System.in);
-        int choice;
+        int choice = 0;
         do{
             System.out.println("Pick a number and press enter");
             choice = sc.nextInt();  
             
             if(choice == 1){            
-                System.out.println("[1] SIMPLE RANDOM SAMPLING");               
+                System.out.println("[1] SIMPLE RANDOM SAMPLING");
+                GetData();
             }
             
             else if (choice == 2){
@@ -43,7 +44,7 @@ public class Sampling1 {
             else if(choice == 3){
                 System.out.println("[3] STRATIFIED SAMPLING");
             }
-            else if (choice >4 || choice <4){
+            else if (choice > 4 || choice < 4){
                 System.out.println("INVALID INPUT");
             }
         
@@ -52,9 +53,38 @@ public class Sampling1 {
         
         System.out.println("[4] EXIT");               
         System.exit(0);
+               
+    }
+    
+    public static ArrayList<String> GetData(){
+        int N = 0, n = 0;
+        ArrayList<String> list = new ArrayList<>();
+        
+        Scanner sc = new Scanner(System.in);
+        System.out.println("ENTER THE POPULATION: ");
+        N = sc.nextInt();
+        
+        System.out.println("ENTER THE SAMPLING FRAME");
+        sc.nextLine();
+        for(int i = 1; i <= N; i++){
+            System.out.print("["+i+"]" +" ");
+            String member = sc.nextLine();
+            list.add(member);    
+            
+        }
+        //displayed to check if inputs match
+        System.out.println("This is the sampling frame:");
+        System.out.println(list);
+        return list;
+    }
         
         
+       
+   
+    
+    public void SRS(){
         
     }
+    
 }
 
