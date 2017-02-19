@@ -12,3 +12,11 @@ program only exits iff user chooses quit
 if user chooses 1
   1. get input POPULATION
   2. get sampling frame
+  3. get sample size
+    if user enters value
+      generate
+        maybe call a function
+    else
+      generate with default 20%
+        meybe call a function
+        
