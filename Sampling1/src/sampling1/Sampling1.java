@@ -82,8 +82,12 @@ public class Sampling1 {
         System.out.println(list);
         
        
-        System.out.println("ENTER THE SAMPLE SIZE: ");
-        n = sc.nextInt();
+        do{ 
+            System.out.println("ENTER THE SAMPLE SIZE: ");
+            n = sc.nextInt();
+            
+        } while(n < 1 || n >= N);
+        
         
         
         return list;
@@ -96,20 +100,31 @@ public class Sampling1 {
     public static void SRS(){
        ArrayList<Integer> sampleframe = GetData();
        ArrayList<Integer> samples = new ArrayList<>();
+       ArrayList<Integer> chosenIndex = new ArrayList<>(n);
        System.out.println(sampleframe);
-             
+       
+       //System.out.println(n);
+       
        
        Random rand = new Random();
        Integer r;
-       //add constraints
+       
+       //System.out.println(r);
+       
        int chosen = 0;
        for (int i = 0; i < n; i++){  
-           
-           r = rand.nextInt(N);
-           System.out.println("r "+r);
-              if(!samples.contains(r))
-               chosen = sampleframe.get(r);
-                samples.add(chosen);
+            r = rand.nextInt(N);
+            System.out.println("r "+r);
+            chosenIndex.add(r);
+            
+            while (samples.size() != n){
+                if(!chosenIndex.contains(r) && !samples.contains(sampleframe.get(r))){
+                    chosen = sampleframe.get(r);
+                    samples.add(chosen);
+                } else {
+                    r = rand.nextInt(N);
+                }
+            }
                //System.out.println(chosen);
        }
        
