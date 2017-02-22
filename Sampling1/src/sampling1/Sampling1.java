@@ -7,6 +7,14 @@ package sampling1;
 
 import java.util.*;
 
+/* UPDATE:
+TODO:
+- implementation for character input
+- 20% default 
+- stratified sampling
+- extra restrictions
+
+*/
 
 
 /**
@@ -42,7 +50,7 @@ public class Sampling1 {
             
             else if (choice == 2){
                 System.out.println(" SYSTEMATIC SAMPLING");  
-                
+                Systematic();
             }
             
             else if(choice == 3){
@@ -103,9 +111,7 @@ public class Sampling1 {
        ArrayList<Integer> chosenIndex = new ArrayList<>(n);
        System.out.println(sampleframe);
        
-       //System.out.println(n);
-       
-       
+       //System.out.println(n);        
        Random rand = new Random();
        Integer r;
        
@@ -130,6 +136,27 @@ public class Sampling1 {
        
        System.out.println(sampleframe);  
        System.out.println(samples); 
+    }
+    
+    
+    public static void Systematic(){
+        
+    ArrayList<Integer> sampleframe = GetData();
+    ArrayList<Integer> samples = new ArrayList<>();
+    
+    Random rand = new Random();
+
+    int k = N/n;
+    
+    int it = rand.nextInt(k)+1;
+
+    for(int i=0,c=it; i<n;i++,c+=k ){
+        samples.add(sampleframe.get(c));
+    }
+    
+    System.out.println(samples); 
+        
+    
     }
                
     
