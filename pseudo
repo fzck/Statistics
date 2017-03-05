@@ -1,0 +1,8 @@
+ public static void Strat(){
+    
+    ArrayList<ArrayList> al = new ArrayList<>();
+    al = Stratified(al);
+    System.out.println(al);
+        
+        
+    }
