@@ -17,7 +17,7 @@ import java.util.Scanner;
 
 /**todo: chuchu for invalid input
  * GUI
- * display 1 start
+ * display 1 start, daheey
  */
 public class AureoZauleckAnsLab1 {
 
