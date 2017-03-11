@@ -420,4 +420,12 @@ public class SamplingTechniques{
         System.out.println("Please pick a number from the choices and press Enter");
     }
     
+    
+    public static ArrayList Reuse(ArrayList a){
+        
+        ArrayList b = new ArrayList<>(); 
+        Collections.copy(b,a);
+        return b;
+    }
+    
 }
