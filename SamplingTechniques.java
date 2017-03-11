@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+package samplingtechniques;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -335,16 +335,26 @@ public class SamplingTechniques{
     
     public static void Systematic(ArrayList sampleframe){               
         ArrayList samples = new ArrayList<>();
+        ArrayList indices = new ArrayList<>();
         Random rand = new Random();
         int k = N/n;
         int j = rand.nextInt(k);
 
         for(int i=1,c=j; i<=n; i++,c+=k ){
             samples.add(sampleframe.get(c));
+            
+            indices.add(c);
         }
         System.out.println();
         System.out.println("These are the samples:");
-        System.out.println(samples); 
+        for (int i = 0; i < n; i++){
+               j = (int) indices.get(i) + 1;
+               System.out.print("["+j+"] ");
+               System.out.println(samples.get(i));
+               
+        }
+        
+        
      
     }
     //groups similar inputs together   
@@ -411,4 +421,3 @@ public class SamplingTechniques{
     }
     
 }
-    
