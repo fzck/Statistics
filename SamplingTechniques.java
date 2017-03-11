@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package auzau105lab1;
+
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -14,7 +14,7 @@ import java.util.Scanner;
  *
  * @author AUREO, ZAULECK
  */
-public class AuZau105Lab1{
+public class SamplingTechniques{
 
     public static int N, n, method = 0;
     public static double percentage = 0;
