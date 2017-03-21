@@ -1,11 +1,12 @@
 /*
  * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choo.  se Tools | Templates
- * and open the template in the editor. homayghad
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package organizing2;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 /**
@@ -53,7 +54,36 @@ public class Organizing2 {
                 
                 System.out.println("this is the title  "+title);
                 
-                GetData();
+                ArrayList a = new ArrayList<>();
+                ArrayList<ArrayList> all; 
+                a = GetData();
+                
+                Collections.sort(a);
+                all = Stratified(a);
+                System.out.println("GROUPED DATA:  "+all);
+                System.out.println("size  "+all.size());
+                              
+                double percent = 0.0, sum = 0.0;
+                for(int i = 0; i < all.size(); i++){
+                   
+                    ArrayList inner = new ArrayList<>();
+                    inner = all.get(i);
+                    //System.out.println(inner);
+                    
+                    int inner_n = inner.size();
+                    
+                    
+                    
+                    percent = GetPercentage(N, inner_n);
+                    sum += percent;
+                    System.out.println("" + inner.get(0) + "        " + percent);
+                   
+                    
+                    
+                }
+                 System.out.println("      total " + Math.ceil(sum));
+               
+                
                                 
             } else if (choice == 2){
                 System.out.println("*** NUMERICAL ***");
@@ -150,6 +180,39 @@ public class Organizing2 {
             }
         System.out.println("this is the list"+list);
         return list;
+    }
+    
+    public static ArrayList<ArrayList> Stratified (ArrayList ungrouped){        
+        ArrayList<ArrayList> grouped = new ArrayList<>();        
+        boolean[] isVisited = new boolean[ungrouped.size()];
+        
+        for(int i = 0; i < ungrouped.size(); i++){         
+            if(!(isVisited[i])){
+                Object current = ungrouped.get(i);
+                grouped.add( new ArrayList() );
+                ArrayList currList = grouped.get(grouped.size() - 1);
+                currList.add(current);
+
+                for(int j = i+1; j < ungrouped.size(); j++){
+                    Object next = ungrouped.get(j);
+                    if(next.equals(current)){
+                        isVisited[j] = true;
+                        currList.add(next);
+                    }
+                }
+            }
+        }
+        return grouped;        
+    }
+    
+    public static double GetPercentage(int total, int partial){
+        
+        double t = (double) total;
+        double p = (double) partial;
+        
+    
+        
+        return (p/t * 100);
     }
     
 }
