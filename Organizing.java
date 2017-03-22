@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package organizing2;
+package organizing;
+
+
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -16,7 +18,7 @@ import java.util.Scanner;
 
 /** TODO PIE CHART
 **/
-public class Organizing2 {
+public class Organizing {
 
     /**
      * @param args the command line arguments
@@ -95,7 +97,18 @@ public class Organizing2 {
                 title = s.nextLine();
                 
                 System.out.println("this is the title  "+title);
-                        
+                
+                ArrayList<Double> a = new ArrayList<>();
+                //ArrayList<ArrayList> all; 
+                a = GetData2();
+                Collections.sort(a);
+                double min = (double) a.get(0);
+                double max = (double) a.get(N-1);
+                System.out.println(min);
+                System.out.println(max);
+                
+                double range = GetRange(min,max);
+                System.out.println(range);
                 
             } else if(choice == 3){
                 System.out.println("*** QUIT ***");
@@ -185,6 +198,60 @@ public class Organizing2 {
         return list;
     }
     
+       public static ArrayList GetData2(){
+        N = 0;
+        
+        ArrayList<Double> list = new ArrayList<>();        
+        Scanner sc = new Scanner(System.in);
+        String testN = "";
+        int population = 0;
+        do{
+            System.out.println();
+            System.out.println("Enter the maximun number of inputs: ");
+            
+            testN = sc.next();    
+            
+            if(IsNumber(testN)){
+                population = Convert(testN);
+            } else {                
+                do{
+                    System.out.println("Please enter a number only.");
+                    testN = sc.next();
+                } while (!IsNumber(testN));
+                
+                population = Convert(testN);
+            }                         
+            N = population;
+        }while(N <= 1);
+        
+        
+        for(int i = 1; i <= N; i++){
+                String test = "";  
+                Scanner j = new Scanner(System.in);
+                 System.out.print("["+i+"]" +" ");                    
+                    Double member;
+                    member = j.nextDouble();
+                      
+                    
+               /* do{                     
+                    System.out.print("["+i+"]" +" ");                    
+                    Object member = sc.next();
+                    test = member.toString();                    
+                    if(!IsNumber(test)){
+                        System.out.println("Oops. Numbers only");
+                    }
+                }while (!IsNumber(test));
+                       */
+                list.add(member);         
+            }
+        System.out.println("this is the list"+list);
+        return list;
+    }
+    
+    
+    
+    
+    
     public static ArrayList<ArrayList> Stratified (ArrayList ungrouped){        
         ArrayList<ArrayList> grouped = new ArrayList<>();        
         boolean[] isVisited = new boolean[ungrouped.size()];
@@ -218,4 +285,23 @@ public class Organizing2 {
         return (p/t * 100);
     }
     
+    
+    public static double GetK(int n){
+        n = N;
+        double k =  Math.ceil(1 + 3.322*Math.log(N));
+        
+        return k;
+    }
+   
+    public static double GetRange(double min, double max){
+        
+        return max - min;
+        
+    }
+        
 }
+
+
+/* float.parseFloat(jTextField1.getText)
+    jTectField4.setText(String.valueOf(result)
+*/
