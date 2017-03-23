@@ -28,6 +28,7 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.statistics.HistogramDataset;
 import org.jfree.data.statistics.HistogramType;
 import org.jfree.data.xy.IntervalXYDataset;
@@ -35,6 +36,7 @@ import org.jfree.data.xy.IntervalXYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 import org.jfree.data.statistics.*;
+import org.jfree.ui.RefineryUtilities;
 
 /**
  *
@@ -80,6 +82,8 @@ public class Organizing {
             } 
             
             if(choice == 1){
+                
+                
                 System.out.println("*** CATEGORICAL ***");
                 System.out.println();
                 System.out.println("TITLE(title of data set)");
@@ -92,6 +96,7 @@ public class Organizing {
                 System.out.println("this is the title  "+title);
                 
                 ArrayList a = new ArrayList<>();
+                ArrayList <Double> percentages = new ArrayList<>();
                 ArrayList<ArrayList> all; 
                 a = GetData();
                 
@@ -112,15 +117,37 @@ public class Organizing {
                     
                     
                     percent = GetPercentage(N, inner_n);
+                    percentages.add(percent);
                     sum += percent;
-                    System.out.println("" + inner.get(0) + "        " + percent);
+                    System.out.println("" + inner.get(0) + "\t"+"        " + percent);
                    
                     
                     
                 }
-                 System.out.println("      total " + Math.ceil(sum));
+                 System.out.println("\t"+"total   "+ Math.ceil(sum));
+                 
+                 
                
                 
+ 
+               
+               DefaultPieDataset dataset = new DefaultPieDataset( );
+               for(int i = 0; i < all.size(); i++){
+                   dataset.setValue(all.get(i).get(0).toString()+" = "+percentages.get(i).toString()+"%",percentages.get(i));
+               }
+               JFreeChart chart = ChartFactory.createPieChart(      
+                title,  // chart title 
+                dataset,        // data    
+                true,           // include legend   
+                true, 
+                false);
+                ChartPanel chartPanel = new ChartPanel( chart );        
+                chartPanel.setPreferredSize(new java.awt.Dimension( 560 , 367 ) );        
+                JFrame l = new JFrame();
+                              
+                l.setContentPane( chartPanel );
+                l.setSize(400, 400);
+                l.setVisible(true);
                                 
             } else if (choice == 2){
                
