@@ -183,6 +183,16 @@ public class Organizing {
                 System.out.println("Width" +width);
                 
                 
+                ArrayList<Double> cl = new ArrayList<>();
+                cl.add(min);
+                double rest;
+                for(int i = 1; i < k; i++){
+                    cl.add(min+=width);                    
+                }
+                System.out.println(cl);
+                
+                
+                
             } else if(choice == 3){
                 System.out.println("*** QUIT ***");
             }
