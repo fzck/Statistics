@@ -84,6 +84,7 @@ public class Organizing {
             if(choice == 1){
                 
                 
+                
                 System.out.println("*** CATEGORICAL ***");
                 System.out.println();
                 System.out.println("TITLE(title of data set)");
@@ -104,6 +105,10 @@ public class Organizing {
                 all = Stratified(a);
                 System.out.println("GROUPED DATA:  "+all);
                 System.out.println("size  "+all.size());
+                
+                
+                
+                
                               
                 double percent = 0.0, sum = 0.0;
                 for(int i = 0; i < all.size(); i++){
@@ -164,11 +169,19 @@ public class Organizing {
                 Collections.sort(a);
                 double min = (double) a.get(0);
                 double max = (double) a.get(N-1);
+                
                 System.out.println(min);
                 System.out.println(max);
                 
+                double k =  Math.ceil(1 + 3.322*Math.log10(N));
+                System.out.println("K "+k);
+                
                 double range = GetRange(min,max);
                 System.out.println(range);
+                
+                double width = Math.ceil(range/k);
+                System.out.println("Width" +width);
+                
                 
             } else if(choice == 3){
                 System.out.println("*** QUIT ***");
@@ -364,24 +377,6 @@ public class Organizing {
     public static void GenerateHistogram(){
               
             /*
-                 double[] value = new double[100];
-                Random generator = new Random();
-                for (int i=1; i < 100; i++) {
-                value[i] = generator.nextDouble();
-                    int number = 10;
-                HistogramDataset dataset = new HistogramDataset();
-                dataset.setType(HistogramType.RELATIVE_FREQUENCY);
-                dataset.addSeries("Histogram",value,number);
-                String plotTitle = "Histogram"; 
-                String xaxis = "number";
-                String yaxis = "value"; 
-                PlotOrientation orientation = PlotOrientation.VERTICAL; 
-                boolean show = false; 
-                boolean toolTips = false;
-                boolean urls = false; 
-                JFreeChart chart = ChartFactory.createHistogram( plotTitle, xaxis, yaxis, 
-                         dataset, orientation, show, toolTips, urls);
-                 
                 
                 
                 DefaultCategoryDataset dataset = new DefaultCategoryDataset();
