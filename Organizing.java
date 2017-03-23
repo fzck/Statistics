@@ -123,86 +123,7 @@ public class Organizing {
                 
                                 
             } else if (choice == 2){
-                
-            /*
-                 double[] value = new double[100];
-                Random generator = new Random();
-                for (int i=1; i < 100; i++) {
-                value[i] = generator.nextDouble();
-                    int number = 10;
-                HistogramDataset dataset = new HistogramDataset();
-                dataset.setType(HistogramType.RELATIVE_FREQUENCY);
-                dataset.addSeries("Histogram",value,number);
-                String plotTitle = "Histogram"; 
-                String xaxis = "number";
-                String yaxis = "value"; 
-                PlotOrientation orientation = PlotOrientation.VERTICAL; 
-                boolean show = false; 
-                boolean toolTips = false;
-                boolean urls = false; 
-                JFreeChart chart = ChartFactory.createHistogram( plotTitle, xaxis, yaxis, 
-                         dataset, orientation, show, toolTips, urls);
-                 
-                
-                
-                DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-                dataset.setValue(80, "Mark", "Student1");
-                dataset.setValue(50, "Mark", "Student2");
-                dataset.setValue(75, "Mark", "Student3");
-                dataset.setValue(95, "Mark", "Student4");
-                
-                
-                
-                //JFreeChart chart = ChartFactory.createBarChart("S SCORE", "NAME", "MARKS", dataset,PlotOrientation.VERTICAL, false, true, false);
-                //JFreeChart chart = ChartFactory.createHistogram("SCORE", "NAME", "MARKS", (IntervalXYDataset) dataset, PlotOrientation.VERTICAL, false, true, false);
-                
                
-                */
-                
-                double[] value = new double[100];
-       Random generator = new Random();
-       for (int i=1; i < 100; i++) {
-       value[i] = generator.nextDouble();
-           int number = 10;
-       HistogramDataset dataset = new HistogramDataset();
-       dataset.setType(HistogramType.RELATIVE_FREQUENCY);
-       dataset.addSeries("Histogram",value,number);
-       String plotTitle = "Histogram"; 
-       String xaxis = "number";
-       String yaxis = "value"; 
-       PlotOrientation orientation = PlotOrientation.VERTICAL; 
-       boolean show = false; 
-       boolean toolTips = false;
-       boolean urls = false; 
-       JFreeChart chart = ChartFactory.createHistogram( plotTitle, xaxis, yaxis, 
-                dataset, orientation, show, toolTips, urls);
-       
-       int width = 500;
-       int height = 300; 
-       /*
-        ChartPanel chartPanel = new ChartPanel( chart );        
-        chartPanel.setPreferredSize(new java.awt.Dimension( 500 , 300 ) );        
-        JFrame l = new JFrame();
-        l.setContentPane( chartPanel );
-        l.setSize(400, 400);
-        l.setVisible(true);
-       */
-       
-       
-        try {
-        
-            ChartUtilities.saveChartAsPNG(new File("histogram.PNG"), chart, width, height);
-        } catch (IOException e) {}
-        
-        
-       }          
-                
-            
-                
-            
-        }
-                
-                /*
                 System.out.println("*** NUMERICAL ***");
                 System.out.println();
                 System.out.println("TITLE(title of data set)");
@@ -225,7 +146,7 @@ public class Organizing {
             } else if(choice == 3){
                 System.out.println("*** QUIT ***");
             }
-            */
+            
         }while(choice != 3);
         
         System.out.println("Thank you for your time.");               
@@ -337,16 +258,12 @@ public class Organizing {
             N = population;
         }while(N <= 1);
         
+           String test = "";  
+               
+        
         
         for(int i = 1; i <= N; i++){
-                String test = "";  
-                Scanner j = new Scanner(System.in);
-                 System.out.print("["+i+"]" +" ");                    
-                    Double member;
-                    member = j.nextDouble();
-                      
-                    
-               /* do{                     
+        do{                     
                     System.out.print("["+i+"]" +" ");                    
                     Object member = sc.next();
                     test = member.toString();                    
@@ -354,13 +271,17 @@ public class Organizing {
                         System.out.println("Oops. Numbers only");
                     }
                 }while (!IsNumber(test));
-                       */
-                list.add(member);         
-            }
-        System.out.println("this is the list"+list);
-        return list;
+                       
+                        
+         
+        Double converted = 0.0;
+        converted = Double.parseDouble(test);
+        list.add(converted);
+        
+        }
+       System.out.println("this is the list"+list);
+       return list;
     }
-    
     
     
     
@@ -411,8 +332,89 @@ public class Organizing {
         return max - min;
         
     }
+    
+    
+    public static void GenerateHistogram(){
+              
+            /*
+                 double[] value = new double[100];
+                Random generator = new Random();
+                for (int i=1; i < 100; i++) {
+                value[i] = generator.nextDouble();
+                    int number = 10;
+                HistogramDataset dataset = new HistogramDataset();
+                dataset.setType(HistogramType.RELATIVE_FREQUENCY);
+                dataset.addSeries("Histogram",value,number);
+                String plotTitle = "Histogram"; 
+                String xaxis = "number";
+                String yaxis = "value"; 
+                PlotOrientation orientation = PlotOrientation.VERTICAL; 
+                boolean show = false; 
+                boolean toolTips = false;
+                boolean urls = false; 
+                JFreeChart chart = ChartFactory.createHistogram( plotTitle, xaxis, yaxis, 
+                         dataset, orientation, show, toolTips, urls);
+                 
+                
+                
+                DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+                dataset.setValue(80, "Mark", "Student1");
+                dataset.setValue(50, "Mark", "Student2");
+                dataset.setValue(75, "Mark", "Student3");
+                dataset.setValue(95, "Mark", "Student4");
+                
+                
+                
+                //JFreeChart chart = ChartFactory.createBarChart("S SCORE", "NAME", "MARKS", dataset,PlotOrientation.VERTICAL, false, true, false);
+                //JFreeChart chart = ChartFactory.createHistogram("SCORE", "NAME", "MARKS", (IntervalXYDataset) dataset, PlotOrientation.VERTICAL, false, true, false);
+                
+               
+                */
+                
+                double[] value = new double[100];
+       Random generator = new Random();
+       for (int i=1; i < 100; i++) {
+       value[i] = generator.nextDouble();
+           int number = 10;
+       HistogramDataset dataset = new HistogramDataset();
+       dataset.setType(HistogramType.RELATIVE_FREQUENCY);
+       dataset.addSeries("Histogram",value,number);
+       String plotTitle = "Histogram"; 
+       String xaxis = "number";
+       String yaxis = "value"; 
+       PlotOrientation orientation = PlotOrientation.VERTICAL; 
+       boolean show = false; 
+       boolean toolTips = false;
+       boolean urls = false; 
+       JFreeChart chart = ChartFactory.createHistogram( plotTitle, xaxis, yaxis, 
+                dataset, orientation, show, toolTips, urls);
+       
+       int width = 500;
+       int height = 300; 
+       /*
+        ChartPanel chartPanel = new ChartPanel( chart );        
+        chartPanel.setPreferredSize(new java.awt.Dimension( 500 , 300 ) );        
+        JFrame l = new JFrame();
+        l.setContentPane( chartPanel );
+        l.setSize(400, 400);
+        l.setVisible(true);
+       */
+       
+       
+        try {
+        
+            ChartUtilities.saveChartAsPNG(new File("histogram.PNG"), chart, width, height);
+        } catch (IOException e) {}
+        
+        
+       }          
+                
+          
+        
+    }
         
 }
+
 
 
 /* float.parseFloat(jTextField1.getText)
