@@ -224,23 +224,40 @@ public class Organizing2 {
                 
                 
                     for(int j = 0; j < k; j++){
-                        for(int i = 0; i < N; i++)
+                        for(int i = 0; i < N; i++){
                         
                             if( (a.get(i) >= tlcl.get(j)) && (a.get(i) <= tucl.get(j)) ){
                                 freq.add( new ArrayList<Double>() );
                                 freq.get(j).add(a.get(i));
-                           
-                    }
+                            }
+                        
+                        }
                     
+                }
+                    
+                ArrayList<Double>  freqSize = new ArrayList<>();
+                Double size = 0.0;
+                for(int i = 0; i < k; i++){
+                    size = (double) freq.get(i).size();
+                    freqSize.add(size);
+                }
+                
+                ArrayList<Double>  freqPercent = new ArrayList<>();
+                for(int i = 0; i < k; i++){
+                    
+                    freqPercent.add(freqSize.get(i)/N*100);
                 }
                 
                 
-                System.out.println("frequency list "+freq);
-                 System.out.println("frequency size "+freq.size());
                 
-                System.out.println("CLASS LIMITS"+"\t"+"T CLASS LIMITS"+"\t"+"MID"+"\t"+"FREQ");
+                System.out.println("frequency list "+freq);
+                
+                System.out.println("frequency sizes "+freqSize);
+                System.out.println("frequency percentages "+freqPercent);
+                
+                System.out.println("CLASS LIMITS"+"\t"+"T CLASS LIMITS"+"\t"+"MID"+"\t"+"FREQ"+"\t"+"PERCENT");
                 for(int i = 0; i < k; i++){
-                    System.out.println(cl.get(i)+" - "+ cl2.get(i)+"\t"+tlcl.get(i)+" - "+tucl.get(i)+"\t"+midList.get(i)+"\t"+freq.get(i).size());
+                    System.out.println(cl.get(i)+" - "+ cl2.get(i)+"\t"+tlcl.get(i)+" - "+tucl.get(i)+"\t"+midList.get(i)+"\t"+freq.get(i).size()+"\t"+freqPercent.get(i));
                 }
                 
                
