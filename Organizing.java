@@ -1,9 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package organizing;
+package organizing2;
 
 
 
@@ -15,9 +10,7 @@ import java.util.Collections;
 import java.util.Scanner;
 import java.util.Map;
 import java.util.Random;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import org.jfree.chart.ChartFactory;
@@ -48,7 +41,7 @@ import org.jfree.ui.RefineryUtilities;
 
 
   
-public class Organizing {
+public class Organizing2 {
     
     
     
@@ -133,7 +126,7 @@ public class Organizing {
                  
                  
                
-                
+                 System.out.println("all = "+all);
  
                
                DefaultPieDataset dataset = new DefaultPieDataset( );
@@ -167,20 +160,21 @@ public class Organizing {
                 //ArrayList<ArrayList> all; 
                 a = GetData2();
                 Collections.sort(a);
+                System.out.println("sorted a "+a);
                 double min = (double) a.get(0);
                 double max = (double) a.get(N-1);
                 
-                System.out.println(min);
-                System.out.println(max);
+                System.out.println("Min" +min);
+                System.out.println("Max" +max);
                 
                 double k =  Math.ceil(1 + 3.322*Math.log10(N));
                 System.out.println("K "+k);
                 
                 double range = GetRange(min,max);
-                System.out.println(range);
+                System.out.println("Range "+range);
                 
                 double width = Math.ceil(range/k);
-                System.out.println("Width" +width);
+                System.out.println("Width " +width);
                 
                 
                 ArrayList<Double> cl = new ArrayList<>();
@@ -189,8 +183,48 @@ public class Organizing {
                 for(int i = 1; i < k; i++){
                     cl.add(min+=width);                    
                 }
-                System.out.println(cl);
                 
+                System.out.println(cl);
+                ArrayList<Double> cl2 = new ArrayList<>();
+                double cl2min = cl.get(1) - 1;
+                cl2.add(cl2min);
+                for(int i = 1; i <k; i++){
+                    cl2.add(cl2min+=width);
+                }
+                
+                System.out.println(cl2);
+                
+                
+                 ArrayList<Double> tlcl = new ArrayList<>();
+                double tlclmin = cl.get(0) - .5;
+                tlcl.add(tlclmin);
+                for(int i = 1; i <k; i++){
+                    tlcl.add(tlclmin+=width);
+                }
+                
+                ArrayList<Double> tucl = new ArrayList<>();
+                double tuclmin = cl2.get(0) + .5;
+                tucl.add(tuclmin);
+                for(int i = 1; i <k; i++){
+                    tucl.add(tuclmin+=width);
+                }
+                
+                ArrayList<Double> midList = new ArrayList<>();
+                double mid = (cl.get(0) + cl2.get(0)) / 2;
+                midList.add(mid);
+                for(int i = 1; i <k; i++){
+                    midList.add(mid+=width);
+                }
+                
+                System.out.println();
+                
+                System.out.println("CLASS LIMITS"+"\t"+"TRUE CLASS LIMITS"+"\t"+"MID");
+                for(int i = 0; i < k; i++){
+                    System.out.println(cl.get(i)+" - "+ cl2.get(i)+"\t"+tlcl.get(i)+" - "+tucl.get(i)+"\t"+midList.get(i));
+                }
+                
+               
+               
                 
                 
             } else if(choice == 3){
@@ -403,7 +437,7 @@ public class Organizing {
                
                 */
                 
-                double[] value = new double[100];
+       double[] value = new double[100];
        Random generator = new Random();
        for (int i=1; i < 100; i++) {
        value[i] = generator.nextDouble();
