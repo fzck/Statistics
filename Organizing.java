@@ -213,14 +213,34 @@ public class Organizing2 {
                 double mid = (cl.get(0) + cl2.get(0)) / 2;
                 midList.add(mid);
                 for(int i = 1; i <k; i++){
-                    midList.add(mid+=width);
+                    midList.add(mid += width);
                 }
                 
-                System.out.println();
+                ArrayList<ArrayList<Double>>  freq = new ArrayList<>();
                 
-                System.out.println("CLASS LIMITS"+"\t"+"TRUE CLASS LIMITS"+"\t"+"MID");
+                
+                double ctr = 0.0;
+                
+                
+                
+                    for(int j = 0; j < k; j++){
+                        for(int i = 0; i < N; i++)
+                        
+                            if( (a.get(i) >= tlcl.get(j)) && (a.get(i) <= tucl.get(j)) ){
+                                freq.add( new ArrayList<Double>() );
+                                freq.get(j).add(a.get(i));
+                           
+                    }
+                    
+                }
+                
+                
+                System.out.println("frequency list "+freq);
+                 System.out.println("frequency size "+freq.size());
+                
+                System.out.println("CLASS LIMITS"+"\t"+"T CLASS LIMITS"+"\t"+"MID"+"\t"+"FREQ");
                 for(int i = 0; i < k; i++){
-                    System.out.println(cl.get(i)+" - "+ cl2.get(i)+"\t"+tlcl.get(i)+" - "+tucl.get(i)+"\t"+midList.get(i));
+                    System.out.println(cl.get(i)+" - "+ cl2.get(i)+"\t"+tlcl.get(i)+" - "+tucl.get(i)+"\t"+midList.get(i)+"\t"+freq.get(i).size());
                 }
                 
                
