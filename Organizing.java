@@ -1,5 +1,5 @@
 package organizing2;
-
+/*TO ADD HISTOGRAM*/
 
 
 import java.awt.Color;
