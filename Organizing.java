@@ -1,6 +1,6 @@
 package organizing2;
 /*TO ADD HISTOGRAM*/
-
+//try bar graph
 
 import java.awt.Color;
 import java.io.File;
