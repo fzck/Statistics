@@ -1,7 +1,7 @@
 package organizing2;
 /*TO ADD HISTOGRAM*/
 //try bar graph
-
+//todo collapse
 import java.awt.Color;
 import java.io.File;
 import java.io.IOException;
