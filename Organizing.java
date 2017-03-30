@@ -2,6 +2,8 @@ package organizing2;
 /*TO ADD HISTOGRAM*/
 //try bar graph
 //todo collapse
+//to not prograstinate
+//add graphics
 import java.awt.Color;
 import java.io.File;
 import java.io.IOException;
