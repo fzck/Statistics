@@ -1,9 +1,7 @@
 package organizing2;
-/*TO ADD HISTOGRAM*/
-//try bar graph
+
 //todo collapse
-//to not prograstinate
-//add graphics
+
 import java.awt.Color;
 import java.io.File;
 import java.io.IOException;
@@ -150,7 +148,8 @@ public class Organizing2 {
                 l.setVisible(true);
                                 
             } else if (choice == 2){
-               
+             
+            /*    
                 System.out.println("*** NUMERICAL ***");
                 System.out.println();
                 System.out.println("TITLE(title of data set)");
@@ -263,7 +262,11 @@ public class Organizing2 {
                 }
                 
                
-               
+               */
+                double marks[]={70, 36, 43, 69, 82, 48, 34, 62, 35, 15,
+                                59, 139, 46, 37, 42, 30, 55, 56, 36, 82, 
+                                38, 89, 54, 25, 35, 24, 22, 9, 55, 19};
+                createHistogram(marks);
                 
                 
             } else if(choice == 3){
@@ -516,6 +519,57 @@ public class Organizing2 {
                 
           
         
+    }
+    
+    
+    public static JFreeChart createHistogram(double[] doubleMatrix){
+
+        // Generate a one dimensional array of the size w*h of the double matrix
+        ArrayList<Double> dataArrayList = new ArrayList<Double>();
+
+        for (int i=0; i<doubleMatrix.length; i++) {
+           
+                double value =  doubleMatrix[i];
+                if( Double.isNaN(value))
+                    continue;
+                else
+                    dataArrayList.add(value);
+                    System.out.println(value);
+            }
+        
+
+        double[] data = new double[dataArrayList.size()];
+
+        for(int p = 0; p < dataArrayList.size();p++)
+             data[p] = dataArrayList.get(p);
+
+
+       // int number = data.length;
+        HistogramDataset dataset = new HistogramDataset();
+        //dataset.setType(HistogramType.RELATIVE_FREQUENCY);
+        //HistogramBin bin = new
+        dataset.setType(HistogramType.FREQUENCY);
+        dataset.addSeries("Hist",data,8); // Number of bins is 50
+        String plotTitle = "HISTOGRAM";
+        String yAxis = "Frequency";
+        String xAxis = "Mass Error (Da)";
+        PlotOrientation orientation = PlotOrientation.VERTICAL;
+
+        boolean show = false;
+        boolean toolTips = false;
+        boolean urls = false;
+        JFreeChart chart = ChartFactory.createHistogram(plotTitle, xAxis, yAxis,
+                dataset, orientation, show, toolTips, urls);
+
+        chart.setBackgroundPaint(Color.white);
+        ChartPanel chartPanel = new ChartPanel( chart );        
+        chartPanel.setPreferredSize(new java.awt.Dimension( 500 , 300 ) );        
+        JFrame l = new JFrame();
+        l.setContentPane( chartPanel );
+        l.setSize(400, 400);
+        l.setVisible(true);
+       
+        return chart;
     }
         
 }
