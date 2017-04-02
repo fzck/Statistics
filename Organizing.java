@@ -257,6 +257,29 @@ public class Organizing {
                     
                     freqPercent.add(freqSize.get(i)/N*100);
                 }
+                ArrayList<Double> cfs = new ArrayList<>();
+                Double cf = freqSize.get(0);
+                cfs.add(cf);
+                for(int i = 1; i < k; i++){
+                    cf += freqSize.get(i);
+                    cfs.add(cf);
+                }
+                
+                Double sum = 0.0;
+                for (int i = 0; i < cfs.size(); i++){
+                    sum+= cfs.get(i);
+                }
+                
+                ArrayList<Double> cps = new ArrayList<>();
+                Double cp = 0.0;
+                for (int i = 0; i < k; i++){
+                    cp = (cfs.get(i)/N) * 100;
+                    cps.add(cp);
+                }
+                
+                
+                System.out.println("T o t a l: "+sum);
+                System.out.println(cfs);
                 
                 
                 
@@ -265,9 +288,15 @@ public class Organizing {
                 System.out.println("frequency sizes "+freqSize);
                 System.out.println("frequency percentages "+freqPercent);
                 
-                System.out.println("CLASS LIMITS"+"\t"+"T CLASS LIMITS"+"\t"+"MID"+"\t"+"FREQ"+"\t"+"PERCENT");
+                System.out.println("CLASS LIMITS"+"\t"+"T CLASS LIMITS"+"\t"+"MID"+"\t"+"FREQ"+"\t"+"PERCENT"+"\t"+"CF"+"\t"+"CP");
                 for(int i = 0; i < k; i++){
-                    System.out.println(cl.get(i)+" - "+ cl2.get(i)+"\t"+tlcl.get(i)+" - "+tucl.get(i)+"\t"+midList.get(i)+"\t"+freq.get(i).size()+"\t"+freqPercent.get(i));
+                    System.out.println(cl.get(i)+" - "+ cl2.get(i)+
+                            "\t"+tlcl.get(i)+" - "+tucl.get(i)+
+                            "\t"+midList.get(i)+
+                            "\t"+freq.get(i).size()+
+                            "\t"+freqPercent.get(i)+
+                            "\t"+cfs.get(i)+
+                            "\t"+cps.get(i));
                 }
                 
                
