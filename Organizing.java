@@ -1,6 +1,5 @@
-package organizing2;
 
-//todo collapse
+package organizing;
 
 import java.awt.Color;
 import java.io.File;
@@ -41,7 +40,7 @@ import org.jfree.ui.RefineryUtilities;
 
 
   
-public class Organizing2 {
+public class Organizing {
     
     
     
@@ -149,7 +148,7 @@ public class Organizing2 {
                                 
             } else if (choice == 2){
              
-            /*    
+               
                 System.out.println("*** NUMERICAL ***");
                 System.out.println();
                 System.out.println("TITLE(title of data set)");
@@ -262,11 +261,14 @@ public class Organizing2 {
                 }
                 
                
-               */
-                double marks[]={70, 36, 43, 69, 82, 48, 34, 62, 35, 15,
-                                59, 139, 46, 37, 42, 30, 55, 56, 36, 82, 
-                                38, 89, 54, 25, 35, 24, 22, 9, 55, 19};
-                createHistogram(marks);
+                
+               
+                
+                int bins = (int) k;
+                System.out.println("You may input a label for your X axis:");
+                String x = "";
+                x = s.nextLine();
+                createHistogram(a,bins,title,x);
                 
                 
             } else if(choice == 3){
@@ -522,14 +524,14 @@ public class Organizing2 {
     }
     
     
-    public static JFreeChart createHistogram(double[] doubleMatrix){
+    public static JFreeChart createHistogram(ArrayList doubleMatrix, int width, String title, String label){
 
         // Generate a one dimensional array of the size w*h of the double matrix
         ArrayList<Double> dataArrayList = new ArrayList<Double>();
 
-        for (int i=0; i<doubleMatrix.length; i++) {
+        for (int i=0; i<doubleMatrix.size(); i++) {
            
-                double value =  doubleMatrix[i];
+                double value =  Double.parseDouble(doubleMatrix.get(i).toString());
                 if( Double.isNaN(value))
                     continue;
                 else
@@ -546,13 +548,14 @@ public class Organizing2 {
 
        // int number = data.length;
         HistogramDataset dataset = new HistogramDataset();
-        //dataset.setType(HistogramType.RELATIVE_FREQUENCY);
-        //HistogramBin bin = new
+        
+        
+        
         dataset.setType(HistogramType.FREQUENCY);
-        dataset.addSeries("Hist",data,8); // Number of bins is 50
-        String plotTitle = "HISTOGRAM";
+        dataset.addSeries("Hist",data,width); 
+        String plotTitle = title;
         String yAxis = "Frequency";
-        String xAxis = "Mass Error (Da)";
+        String xAxis = label;
         PlotOrientation orientation = PlotOrientation.VERTICAL;
 
         boolean show = false;
@@ -578,4 +581,5 @@ public class Organizing2 {
 
 /* float.parseFloat(jTextField1.getText)
     jTectField4.setText(String.valueOf(result)
+
 */
