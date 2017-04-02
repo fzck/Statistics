@@ -1,6 +1,16 @@
 
 package organizing;
 
+//todo separate functions for table
+//collapse
+//add yes or no's
+//add restrictions
+//comebacks
+//cf
+//c%
+
+
+
 import java.awt.Color;
 import java.io.File;
 import java.io.IOException;
