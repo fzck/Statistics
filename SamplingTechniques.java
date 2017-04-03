@@ -432,20 +432,21 @@ public class Organizing {
                 }
                 */
                 
-                display:    
+                    
+                 
             DisplayTables(k, cl, cl2,
                             tlcl,tucl,midList,freq,
-                            freqPercent, cfs, cps,  title );    
-               
+                            freqPercent, cfs, cps,  title );  
                
             int type = 0, testT = 0;
             String typeTest = "";
+            do{
             do{ 
+               
+               
                 System.out.println("GENERATE GRAPH?");
                 System.out.println("[1] YES");
                 System.out.println("[2] NO");     
-
-
                 System.out.println();
                 System.out.println("Please pick a number from the choices above.");
 
@@ -464,30 +465,19 @@ public class Organizing {
                 type = testT;
             }while(type < 1 || type > 2);
             
-            if (type == 1){   
-                
-                
+            if (type == 1){                   
                 int bins = (int) k;
                 System.out.println("You may input a label for your X axis:");
                 String x = "";
                 x = s.nextLine();
                 createHistogram(a,bins,title,x);
-                
-              
-                
-            }else{
-                //do nothing?
-            }
-            
-            
-            int type2 = 0, testT2 = 0;
-            String typeTest2 = "";
-            do{ 
+                      
+                int type2 = 0, testT2 = 0;
+                String typeTest2 = "";
+                do{ 
                 System.out.println("REDISPLAY TABLE?");
                 System.out.println("[1] YES");
                 System.out.println("[2] NO");     
-
-
                 System.out.println();
                 System.out.println("Please pick a number from the choices above.");
 
@@ -504,21 +494,19 @@ public class Organizing {
                     testT2 = Convert(typeTest2);
                 }      
                 type2 = testT2;
-            }while(type2 < 1 || type2 > 2);
+            }while( (type2 < 1 || type2 > 2) && type != 2);
             
             if (type2 == 1){  
-                
-                
-                
+               
                 DisplayTables(k, cl, cl2,
                             tlcl,tucl,midList,freq,
                             freqPercent, cfs, cps,  title );
-                
-             
-              
-            }else{
-                //do nothing?
+
+                }else{
+                    //do nothing?
+                }
             }
+            }while(type!=2);
             
                
                 
