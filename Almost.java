@@ -6,10 +6,11 @@ package organizing;
 //add yes or no's
 //add restrictions
 //comebacks
-//tables
+//to debug
 
 
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.io.File;
 import java.io.IOException;
@@ -19,9 +20,13 @@ import java.util.Collections;
 import java.util.Scanner;
 import java.util.Map;
 import java.util.Random;
+import javax.swing.BorderFactory;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
 import org.jfree.chart.ChartPanel;
@@ -169,12 +174,12 @@ public class Organizing {
                 
                 ArrayList<Double> a = new ArrayList<>();
                 //ArrayList<ArrayList> all; 
-                a = GetData2();
+                //a = GetData2();
                 
                 
-/*                
+                
                 double[] arr = {70, 36, 43, 69,82,48,34,62,35,15,
-                59,139,46,37,42,30,55,56,82,
+                59,139,46,37,42,30,55,56,36,82,
                 38,89,54,25,35,24,22,9,55,19};
                 N = arr.length;
                 double t = 0.0;
@@ -183,7 +188,7 @@ public class Organizing {
                     
                     a.add(arr[i]);
                 }
- */               
+               
                 Collections.sort(a);
                 System.out.println("sorted a "+a);
                 double min = (double) a.get(0);
@@ -361,6 +366,138 @@ public class Organizing {
                             "\t"+new DecimalFormat("#.##").format(cps.get(i)));
                 }
                 
+        JFrame frame = new JFrame();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);                        
+        JTable table = new JTable();    
+        table.setModel(new DefaultTableModel((int) (k + 2), 7));
+
+        table.setValueAt("CLASS LIMIT", 0, 0);
+        table.setValueAt("TRUE CLASS LIMIT", 0, 1);
+        table.setValueAt("MIDPOINTS", 0, 2);
+        table.setValueAt("FREQUENCY", 0, 3);
+        table.setValueAt("%", 0, 4);
+        table.setValueAt("CF", 0, 5);
+        table.setValueAt("C%", 0, 6);
+        table.setValueAt("n = " + N, (int) (k + 1), 3);
+        table.setValueAt("TOTAL = 100%", (int) (k + 1), 4);
+        
+        for(int i = 0; i < k; i++){
+            table.setValueAt(cl.get(i)+" - "+cl2.get(i),i+1,0);
+            table.setValueAt(tlcl.get(i)+" - "+tucl.get(i),i+1,1);
+            table.setValueAt(midList.get(i),i+1,2);
+            table.setValueAt(freq.get(i).size(),i+1,3);
+            table.setValueAt(new DecimalFormat("#.##").format(freqPercent.get(i)),i+1,4);
+            table.setValueAt(cfs.get(i),i+1,5);
+            table.setValueAt(new DecimalFormat("#.##").format(cps.get(i)),i+1,6);
+        }
+
+        JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.setBorder(BorderFactory.createTitledBorder (title));
+        frame.add(scrollPane, BorderLayout.CENTER);
+        frame.setSize(300, 150);
+        frame.setVisible(true);
+        
+        
+        
+        JFrame frame2 = new JFrame();
+        frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);                        
+        JTable table2 = new JTable();    
+        table2.setModel(new DefaultTableModel((int) (k + 2), 7));
+
+        table2.setValueAt("CLASS LIMIT", 0, 0);
+        table2.setValueAt("TRUE CLASS LIMIT", 0, 1);
+        table2.setValueAt("MIDPOINTS", 0, 2);
+        table2.setValueAt("FREQUENCY", 0, 3);
+        table2.setValueAt("%", 0, 4);
+        table2.setValueAt("CF", 0, 5);
+        table2.setValueAt("C%", 0, 6);
+        table2.setValueAt("n = " + N, (int) (k + 1), 3);
+        table2.setValueAt("TOTAL = 100%", (int) (k + 1), 4);
+        
+        for(int i = 0; i < k; i++){
+            table2.setValueAt(" <= "+cl2.get(i),i+1,0);
+            table2.setValueAt(" - ",i+1,1);
+            table2.setValueAt(" - ",i+1,2);
+            table2.setValueAt(freq.get(i).size(),i+1,3);
+            table2.setValueAt(new DecimalFormat("#.##").format(freqPercent.get(i)),i+1,4);
+            table2.setValueAt(cfs.get(i),i+1,5);
+            table2.setValueAt(new DecimalFormat("#.##").format(cps.get(i)),i+1,6);
+        }
+
+        JScrollPane scrollPane2 = new JScrollPane(table2);
+        
+        scrollPane2.setBorder(BorderFactory.createTitledBorder (title));
+        frame2.add(scrollPane2, BorderLayout.CENTER);
+        frame2.setSize(300, 150);
+        frame2.setVisible(true);
+        
+        
+        
+        JFrame frame3 = new JFrame();
+        frame3.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);                        
+        JTable table3 = new JTable();    
+        table3.setModel(new DefaultTableModel((int) (k + 2), 7));
+
+        table3.setValueAt("CLASS LIMIT", 0, 0);
+        table3.setValueAt("TRUE CLASS LIMIT", 0, 1);
+        table3.setValueAt("MIDPOINTS", 0, 2);
+        table3.setValueAt("FREQUENCY", 0, 3);
+        table3.setValueAt("%", 0, 4);
+        table3.setValueAt("CF", 0, 5);
+        table3.setValueAt("C%", 0, 6);
+        table3.setValueAt("n = " + N, (int) (k + 1), 3);
+        table3.setValueAt("TOTAL = 100%", (int) (k + 1), 4);
+        
+        for(int i = 0; i < k; i++){
+            table3.setValueAt(" >= "+cl.get(i),i+1,0);
+            table3.setValueAt(" - ",i+1,1);
+            table3.setValueAt(" - ",i+1,2);
+            table3.setValueAt(freq.get(i).size(),i+1,3);
+            table3.setValueAt(new DecimalFormat("#.##").format(freqPercent.get(i)),i+1,4);
+            table3.setValueAt(cfs.get(i),i+1,5);
+            table3.setValueAt(new DecimalFormat("#.##").format(cps.get(i)),i+1,6);
+        }
+
+        JScrollPane scrollPane3 = new JScrollPane(table3);
+        scrollPane3.setBorder(BorderFactory.createTitledBorder (title));
+        frame3.add(scrollPane3, BorderLayout.CENTER);
+        
+        frame3.setSize(300, 150);
+        frame3.setVisible(true);
+        
+        
+        JFrame frame4 = new JFrame();
+        frame4.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);                        
+        JTable table4 = new JTable();    
+        table4.setModel(new DefaultTableModel((int) (k + 2), 7));
+        table4.setValueAt("CLASS LIMIT", 0, 0);
+        table4.setValueAt("TRUE CLASS LIMIT", 0, 1);
+        table4.setValueAt("MIDPOINTS", 0, 2);
+        table4.setValueAt("FREQUENCY", 0, 3);
+        table4.setValueAt("%", 0, 4);
+        table4.setValueAt("CF", 0, 5);
+        table4.setValueAt("C%", 0, 6);
+        table4.setValueAt("n = " + N, (int) (k + 1), 3);
+        table4.setValueAt("TOTAL = 100%", (int) (k + 1), 4);
+        
+        for(int i = 0; i < k; i++){
+            table4.setValueAt(" >= "+cl.get(i)+" and <= "+cl2.get(i),i+1,0);
+            table4.setValueAt(" - ",i+1,1);
+            table4.setValueAt(" - ",i+1,2);
+            table4.setValueAt(freq.get(i).size(),i+1,3);
+            table4.setValueAt(new DecimalFormat("#.##").format(freqPercent.get(i)),i+1,4);
+            table4.setValueAt(cfs.get(i),i+1,5);
+            table4.setValueAt(new DecimalFormat("#.##").format(cps.get(i)),i+1,6);
+        }
+
+        JScrollPane scrollPane4 = new JScrollPane(table4);
+        scrollPane4.setBorder(BorderFactory.createTitledBorder (title));
+        frame4.add(scrollPane4, BorderLayout.CENTER);
+        
+        frame4.setSize(300, 150);
+        frame4.setVisible(true);
+  
+               
                
                 
                
