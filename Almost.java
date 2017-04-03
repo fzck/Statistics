@@ -2,11 +2,12 @@
 package organizing;
 
 //todo separate functions for table
-
+//collapse
 //add yes or no's
 //add restrictions
 //comebacks
-//to debug
+//cf
+//c%
 
 
 
@@ -142,6 +143,32 @@ public class Organizing {
                  
                
                  System.out.println("all = "+all);
+                 
+                 
+        JFrame frame = new JFrame();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);                        
+        JTable table = new JTable();    
+        table.setModel(new DefaultTableModel((int) (all.size() + 2),2));
+
+        table.setValueAt("VALUE LABELS", 0, 0);
+        table.setValueAt("PERCENTAGE", 0, 1);
+        
+        
+        table.setValueAt("TOTAL = 100%", (int) (all.size() + 1), 1);
+        
+        for(int i = 0; i < all.size(); i++){
+            table.setValueAt(all.get(i).get(0),i+1,0);
+            
+            table.setValueAt(new DecimalFormat("#.##").format(percentages.get(i)),i+1,1);
+            
+        }
+
+        JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.setBorder(BorderFactory.createTitledBorder (title));
+        frame.add(scrollPane, BorderLayout.CENTER);
+        frame.setSize(300, 150);
+        frame.setVisible(true);     
+                 
  
                
                DefaultPieDataset dataset = new DefaultPieDataset( );
