@@ -2,18 +2,18 @@
 package organizing;
 
 //todo separate functions for table
-//collapse
+
 //add yes or no's
 //add restrictions
 //comebacks
-//cf
-//c%
+//tables
 
 
 
 import java.awt.Color;
 import java.io.File;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.*;
 import java.util.Collections;
 import java.util.Scanner;
@@ -60,6 +60,7 @@ public class Organizing {
      * @param args the command line arguments
      */
     public static int N;
+    @SuppressWarnings("empty-statement")
     public static void main(String[] args) {
         // TODO code application logic here
     Scanner sc = new Scanner(System.in);
@@ -169,6 +170,20 @@ public class Organizing {
                 ArrayList<Double> a = new ArrayList<>();
                 //ArrayList<ArrayList> all; 
                 a = GetData2();
+                
+                
+/*                
+                double[] arr = {70, 36, 43, 69,82,48,34,62,35,15,
+                59,139,46,37,42,30,55,56,82,
+                38,89,54,25,35,24,22,9,55,19};
+                N = arr.length;
+                double t = 0.0;
+                for(int i = 0; i < N; i++){
+                    
+                    
+                    a.add(arr[i]);
+                }
+ */               
                 Collections.sort(a);
                 System.out.println("sorted a "+a);
                 double min = (double) a.get(0);
@@ -259,9 +274,10 @@ public class Organizing {
                 
                 ArrayList<Double>  freqPercent = new ArrayList<>();
                 for(int i = 0; i < k; i++){
-                    
+                                        
                     freqPercent.add(freqSize.get(i)/N*100);
                 }
+                
                 ArrayList<Double> cfs = new ArrayList<>();
                 Double cf = freqSize.get(0);
                 cfs.add(cf);
@@ -297,15 +313,52 @@ public class Organizing {
                 System.out.println();
                 System.out.println(title);
                 
-                System.out.println("CLASS LIMITS"+"\t"+"T CLASS LIMITS"+"\t"+"MID"+"\t"+"FREQ"+"\t"+"PERCENT"+"\t\t\t"+"CF"+"\t\t"+"CP");
+                System.out.println("CLASS LIMITS"+"\t"+"T CLASS LIMITS"+"\t"+"MID"+"\t"+"FREQ"+"\t"+"PERCENT"+"\t"+"CF"+"\t"+"CP");
                 for(int i = 0; i < k; i++){
                     System.out.println(cl.get(i)+" - "+ cl2.get(i)+
                             "\t"+tlcl.get(i)+" - "+tucl.get(i)+
                             "\t"+midList.get(i)+
                             "\t"+freq.get(i).size()+
-                            "\t"+freqPercent.get(i)+
-                            "\t\t\t"+cfs.get(i)+
-                            "\t\t"+cps.get(i));
+                            "\t"+new DecimalFormat("#.##").format(freqPercent.get(i))+
+                            "\t"+cfs.get(i)+
+                            "\t"+new DecimalFormat("#.##").format(cps.get(i)));
+                }
+                //2
+                System.out.println("CLASS LIMITS"+"\t"+"T C L"+"\t"+"MID"+"\t"+"FREQ"+"\t"+"PERCENT"+"\t"+"CF"+"\t"+"CP");
+                for(int i = 0; i < k; i++){
+                    System.out.println(">="+cl.get(i)+
+                            "\t\t"+" - "+
+                            "\t"+" - "+
+                            "\t"+freq.get(i).size()+
+                            "\t"+new DecimalFormat("#.##").format(freqPercent.get(i))+
+                            "\t"+cfs.get(i)+
+                            "\t"+new DecimalFormat("#.##").format(cps.get(i)));
+                }
+                //3
+                System.out.println("CLASS LIMITS"+"\t"+"T C L"+"\t"+"MID"+"\t"+"FREQ"+"\t"+"PERCENT"+"\t"+"CF"+"\t"+"CP");
+                for(int i = 0; i < k; i++){
+                    System.out.println("<="+cl2.get(i)+
+                            "\t\t"+" - "+
+                            "\t"+" - "+
+                            "\t"+freq.get(i).size()+
+                            "\t"+new DecimalFormat("#.##").format(freqPercent.get(i))+
+                            "\t"+cfs.get(i)+
+                            "\t"+new DecimalFormat("#.##").format(cps.get(i)));
+                }
+                
+                
+                
+                
+                   
+                System.out.println("CLASS LIMITS"+"\t"+"T CLASS LIMITS"+"\t"+"MID"+"\t"+"FREQ"+"\t"+"PERCENT"+"\t"+"CF"+"\t"+"CP");
+                for(int i = 0; i < k; i++){
+                    System.out.println(">="+cl.get(i)+" and <="+cl2.get(i)+
+                            "\t"+" - "+
+                            "\t"+" - "+
+                            "\t"+freq.get(i).size()+
+                            "\t"+new DecimalFormat("#.##").format(freqPercent.get(i))+
+                            "\t"+cfs.get(i)+
+                            "\t"+new DecimalFormat("#.##").format(cps.get(i)));
                 }
                 
                
@@ -503,9 +556,6 @@ public class Organizing {
                 char x = text.charAt(integerPlaces + 1);
                 int decimalPlaces = text.length() - integerPlaces - 1;
                 
-                System.out.println(x);
-                System.out.println(integerPlaces);
-                System.out.println(decimalPlaces);
                 
                 if (decimalPlaces == 1 && x == '0'){
                     return(5 * .1);
