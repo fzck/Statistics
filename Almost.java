@@ -10,7 +10,7 @@ package organizing;
 //c%
 
 //Aureo, Zauleck
-//in this mp, we used the built-in APIs for the histogram and pie chart as well as the tables
+//in this mp, we used the built-in APIs for the histogram and pie chart as well as the 
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -251,17 +251,17 @@ public class Organizing {
 //                59,139,46,37,42,30,55,56,36,82,
 //                38,89,54,25,35,24,22,9,55,19};
                 
+/*                
+                double[] arr = {112, 100, 127,120,134,118,105,110,109,112,
+                110, 118, 117, 116, 118, 122, 114, 114, 105, 109,
+                107, 112, 114, 115, 118, 117, 118, 122, 106, 110,
+                116, 108, 110, 121, 113, 120, 119, 111, 104, 111,
+                120, 113, 120, 117, 105, 110, 118, 112, 114, 114};
+*/                
                 
-//                double[] arr = {112, 100, 127,120,134,118,105,110,109,112,
-//                110, 118, 117, 116, 118, 122, 114, 114, 105, 109,
-//                107, 112, 114, 115, 118, 117, 118, 122, 106, 110,
-//                116, 108, 110, 121, 113, 120, 119, 111, 104, 111,
-//                120, 113, 120, 117, 105, 110, 118, 112, 114, 114};
+                
+                
 //                
-                
-                
-                
-                
 //                N = arr.length;
 //                double t = 0.0;
 //                for(int i = 0; i < N; i++){
