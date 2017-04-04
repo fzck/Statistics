@@ -1,16 +1,7 @@
+package organizing2;
 
-package organizing;
-
-//todo separate functions for table
+//ceiling
 //collapse
-//add yes or no's
-//add restrictions
-//comebacks
-//cf
-//c%
-
-//Aureo, Zauleck
-//in this mp, we used the built-in APIs for the histogram and pie chart as well as the 
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -23,7 +14,6 @@ import java.util.Scanner;
 import java.util.Map;
 import java.util.Random;
 import javax.swing.BorderFactory;
-
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
@@ -48,18 +38,19 @@ import org.jfree.data.statistics.*;
 import org.jfree.ui.RefineryUtilities;
 
 
-  
-public class Organizing {
+//Aureo,Zauleck Lab 2
+//tables, histogram, and pie chart were generated using Java API
+ 
+public class Organizing2 {
     
-
     /**
      * @param args the command line arguments
      */
-    public static int N;
+    public static int N;    
     
     public static void main(String[] args) {
-        // TODO code application logic here
-    Scanner sc = new Scanner(System.in);
+    // TODO code application logic here
+        Scanner sc = new Scanner(System.in);
         String choice_s = "";
         int choice = 0;
         
@@ -67,8 +58,7 @@ public class Organizing {
             DisplayMenu();            
             choice_s = sc.next();
             String title="";
-            Scanner s = new Scanner(System.in);
-            
+            Scanner s = new Scanner(System.in);           
             //test input
             if(IsNumber(choice_s)){
                 choice = Convert(choice_s);
@@ -79,16 +69,14 @@ public class Organizing {
                 } while (!IsNumber(choice_s));
                 choice = Convert(choice_s);
             } 
-            
+          
             if(choice == 1){
                 System.out.println("*** CATEGORICAL ***");
                 System.out.println();
                 System.out.println("TITLE(title of data set)");
-                //sc = new Scanner(System.in);
-               
-                title = s.nextLine();
-                
-                System.out.println("this is the title  "+title);
+                //sc = new Scanner(System.in);               
+                title = s.nextLine();                
+                System.out.println("this is the title:  "+title);
                 
                 ArrayList a = new ArrayList<>();
                 ArrayList <Double> percentages = new ArrayList<>();
@@ -108,40 +96,38 @@ public class Organizing {
                     //System.out.println(inner);
                     
                     int inner_n = inner.size();
-                   
                     percent = GetPercentage(N, inner_n);
                     percentages.add(percent);
                     sum += percent;
                     System.out.println("" + inner.get(0) + "\t"+"        " + percent);
                 }
-                 System.out.println("\t"+"total   "+ Math.ceil(sum));
-               
+                 System.out.println("\t"+"total   "+ Math.ceil(sum));              
                  System.out.println("all = "+all);
                  
             
-            JFrame frame = new JFrame();
-            //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);                        
-            JTable table = new JTable();    
-            table.setModel(new DefaultTableModel((int) (all.size() + 2),2));
+                JFrame frame = new JFrame();
+                //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);                        
+                JTable table = new JTable();    
+                table.setModel(new DefaultTableModel((int) (all.size() + 2),2));
 
-            table.setValueAt("VALUE LABELS", 0, 0);
-            table.setValueAt("PERCENTAGE", 0, 1);
+                table.setValueAt("VALUE LABELS", 0, 0);
+                table.setValueAt("PERCENTAGE", 0, 1);
 
 
-            table.setValueAt("TOTAL = 100%", (int) (all.size() + 1), 1);
+                table.setValueAt("TOTAL = 100%", (int) (all.size() + 1), 1);
 
-            for(int i = 0; i < all.size(); i++){
-                table.setValueAt(all.get(i).get(0),i+1,0);
+                for(int i = 0; i < all.size(); i++){
+                    table.setValueAt(all.get(i).get(0),i+1,0);
 
-                table.setValueAt(new DecimalFormat("#.##").format(percentages.get(i)),i+1,1);
+                    table.setValueAt(new DecimalFormat("#.##").format(percentages.get(i)),i+1,1);
 
-            }
+                }
 
-            JScrollPane scrollPane = new JScrollPane(table);
-            scrollPane.setBorder(BorderFactory.createTitledBorder (title));
-            frame.add(scrollPane, BorderLayout.CENTER);
-            frame.setSize(300, 150);
-            frame.setVisible(true);     
+                JScrollPane scrollPane = new JScrollPane(table);
+                scrollPane.setBorder(BorderFactory.createTitledBorder (title));
+                frame.add(scrollPane, BorderLayout.CENTER);
+                frame.setSize(300, 150);
+                frame.setVisible(true);     
 
             
             int type = 0, testT = 0;
@@ -192,16 +178,13 @@ public class Organizing {
             }else{
                 //do nothing?
             }
-            
-            
+                        
             int type2 = 0, testT2 = 0;
             String typeTest2 = "";
             do{ 
                 System.out.println("REDISPLAY TABLE?");
                 System.out.println("[1] YES");
                 System.out.println("[2] NO");     
-
-
                 System.out.println();
                 System.out.println("Please pick a number from the choices above.");
 
@@ -220,16 +203,11 @@ public class Organizing {
                 type2 = testT2;
             }while(type2 < 1 || type2 > 2);
             
-            if (type2 == 1){   
-            
-            DisplayTable(all,percentages,title);    
-              
+            if (type2 == 1){               
+                DisplayTable(all,percentages,title);                  
             }else{
                 //do nothing?
             }
-            
-            
-            
                                 
             } else if (choice == 2){
              
@@ -243,32 +221,28 @@ public class Organizing {
                 
                 ArrayList<Double> a = new ArrayList<>();
                 //ArrayList<ArrayList> all; 
-                a = GetData2();
+                //a = GetData2();
                 
                 
                 
-//                double[] arr = {70, 36, 43, 69,82,48,34,62,35,15,
-//                59,139,46,37,42,30,55,56,36,82,
-//                38,89,54,25,35,24,22,9,55,19};
+                double[] arr = {70, 36, 43, 69,82,48,34,62,35,15,
+                59,139,46,37,42,30,55,56,36,82,
+                38,89,54,25,35,24,22,9,55,19};
+            
                 
-/*                
+            /*    
                 double[] arr = {112, 100, 127,120,134,118,105,110,109,112,
                 110, 118, 117, 116, 118, 122, 114, 114, 105, 109,
                 107, 112, 114, 115, 118, 117, 118, 122, 106, 110,
                 116, 108, 110, 121, 113, 120, 119, 111, 104, 111,
                 120, 113, 120, 117, 105, 110, 118, 112, 114, 114};
-*/                
+             */   
+               N = arr.length;
+                double t = 0.0;
+                for(int i = 0; i < N; i++){                   
+                    a.add(arr[i]);
+                }
                 
-                
-                
-//                
-//                N = arr.length;
-//                double t = 0.0;
-//                for(int i = 0; i < N; i++){
-//                    
-//                    
-//                    a.add(arr[i]);
-//                }
                
                 Collections.sort(a);
                 System.out.println("sorted a "+a);
@@ -285,6 +259,7 @@ public class Organizing {
                 System.out.println("Range "+range);
                 
                 double width = Math.ceil(range/k);
+                //todo, i ceiling sa 1st decimal point
                 System.out.println("Width " +width);
                 
                 
@@ -454,74 +429,74 @@ public class Organizing {
             int type = 0, testT = 0;
             String typeTest = "";
             do{
-            do{ 
-               
-               
-                System.out.println("GENERATE GRAPH?");
-                System.out.println("[1] YES");
-                System.out.println("[2] NO");     
-                System.out.println();
-                System.out.println("Please pick a number from the choices above.");
-
-                typeTest = sc.next();
-
-                if(IsNumber(typeTest)){
-                    testT = Convert(typeTest);
-                } else {                
-                    do{
-                        System.out.println("Please enter a number only.");
-                        typeTest = sc.next();
-                    } while (!IsNumber(typeTest));
-
-                    testT = Convert(typeTest);
-                }      
-                type = testT;
-            }while(type < 1 || type > 2);
-            
-            if (type == 1){                   
-                int bins = (int) k;
-                System.out.println("You may input a label for your X axis:");
-                String x = "";
-                x = s.nextLine();
-                createHistogram(a,bins,title,x);
-                      
-                int type2 = 0, testT2 = 0;
-                String typeTest2 = "";
                 do{ 
-                System.out.println("REDISPLAY TABLE?");
-                System.out.println("[1] YES");
-                System.out.println("[2] NO");     
-                System.out.println();
-                System.out.println("Please pick a number from the choices above.");
 
-                typeTest2 = sc.next();
+                    System.out.println();
+                    System.out.println("GENERATE GRAPH?");
+                    System.out.println("[1] YES");
+                    System.out.println("[2] NO");     
+                    System.out.println();
+                    System.out.println("Please pick a number from the choices above.");
 
-                if(IsNumber(typeTest2)){
-                    testT2 = Convert(typeTest2);
-                } else {                
-                    do{
-                        System.out.println("Please enter a number only.");
+                    typeTest = sc.next();
+
+                    if(IsNumber(typeTest)){
+                        testT = Convert(typeTest);
+                    } else {                
+                        do{
+                            System.out.println("Please enter a number only.");
+                            typeTest = sc.next();
+                        } while (!IsNumber(typeTest));
+
+                        testT = Convert(typeTest);
+                    }      
+                    type = testT;
+                }while(type < 1 || type > 2);
+            
+                if (type == 1){                   
+                    int bins = (int) k;
+                    System.out.println();
+                    System.out.println("You may input a label for your X axis:");
+                    String x = "";
+                    x = s.nextLine();
+                    createHistogram(a,bins,title,x);
+
+                    int type2 = 0, testT2 = 0;
+                    String typeTest2 = "";
+                    do{ 
+                        System.out.println();
+                        System.out.println("REDISPLAY TABLE?");
+                        System.out.println("[1] YES");
+                        System.out.println("[2] NO");     
+                        System.out.println();
+                        System.out.println("Please pick a number from the choices above.");
+
                         typeTest2 = sc.next();
-                    } while (!IsNumber(typeTest2));
 
-                    testT2 = Convert(typeTest2);
-                }      
-                type2 = testT2;
-            }while( (type2 < 1 || type2 > 2) && type != 2);
+                        if(IsNumber(typeTest2)){
+                            testT2 = Convert(typeTest2);
+                        } else {                
+                            do{
+                                System.out.println("Please enter a number only.");
+                                typeTest2 = sc.next();
+                            } while (!IsNumber(typeTest2));
+
+                            testT2 = Convert(typeTest2);
+                        }      
+                            type2 = testT2;
+                        }while( (type2 < 1 || type2 > 2) && type != 2);
             
-            if (type2 == 1){  
-               
-                DisplayTables(k, cl, cl2,
-                            tlcl,tucl,midList,freq,
-                            freqPercent, cfs, cps,  title );
+                    if (type2 == 1){  
 
-                }else{
-                    //do nothing?
+                        DisplayTables(k, cl, cl2,
+                                    tlcl,tucl,midList,freq,
+                                    freqPercent, cfs, cps,  title );
+                        }else{
+                            //do nothing?
+                        }
                 }
-            }
             }while(type!=2);
-            
-               
+                         
                 
             } else if(choice == 3){
                 System.out.println("*** QUIT ***");
@@ -871,8 +846,8 @@ public class Organizing {
         JTable table = new JTable();    
         table.setModel(new DefaultTableModel((int) (k + 2), 7));
 
-        table.setValueAt("CLASS LIMIT", 0, 0);
-        table.setValueAt("TRUE CLASS LIMIT", 0, 1);
+        table.setValueAt("CLASS LIMITS", 0, 0);
+        table.setValueAt("TRUE CLASS LIMITS", 0, 1);
         table.setValueAt("MIDPOINTS", 0, 2);
         table.setValueAt("FREQUENCY", 0, 3);
         table.setValueAt("%", 0, 4);
@@ -936,8 +911,8 @@ public class Organizing {
             JTable table2 = new JTable();    
             table2.setModel(new DefaultTableModel((int) (k + 2), 7));
 
-            table2.setValueAt("CLASS LIMIT", 0, 0);
-            table2.setValueAt("TRUE CLASS LIMIT", 0, 1);
+            table2.setValueAt("CLASS LIMITS", 0, 0);
+            table2.setValueAt("TRUE CLASS LIMITS", 0, 1);
             table2.setValueAt("MIDPOINTS", 0, 2);
             table2.setValueAt("FREQUENCY", 0, 3);
             table2.setValueAt("%", 0, 4);
@@ -945,9 +920,10 @@ public class Organizing {
             table2.setValueAt("C%", 0, 6);
             table2.setValueAt("n = " + N, (int) (k + 1), 3);
             table2.setValueAt("TOTAL = 100%", (int) (k + 1), 4);
-
-            for(int i = 0; i < k; i++){
-                table2.setValueAt(" <= "+cl2.get(i),i+1,0);
+            
+            table2.setValueAt("below "+cl2.get(0),1,0);
+            for(int i = 1; i < k; i++){
+                table2.setValueAt(cl.get(i)+" - "+cl2.get(i),i+1,0);
                 table2.setValueAt(" - ",i+1,1);
                 table2.setValueAt(" - ",i+1,2);
                 table2.setValueAt(freq.get(i).size(),i+1,3);
@@ -970,8 +946,8 @@ public class Organizing {
             JTable table3 = new JTable();    
             table3.setModel(new DefaultTableModel((int) (k + 2), 7));
 
-            table3.setValueAt("CLASS LIMIT", 0, 0);
-            table3.setValueAt("TRUE CLASS LIMIT", 0, 1);
+            table3.setValueAt("CLASS LIMITS", 0, 0);
+            table3.setValueAt("TRUE CLASS LIMITS", 0, 1);
             table3.setValueAt("MIDPOINTS", 0, 2);
             table3.setValueAt("FREQUENCY", 0, 3);
             table3.setValueAt("%", 0, 4);
@@ -979,16 +955,19 @@ public class Organizing {
             table3.setValueAt("C%", 0, 6);
             table3.setValueAt("n = " + N, (int) (k + 1), 3);
             table3.setValueAt("TOTAL = 100%", (int) (k + 1), 4);
-
+            int a = (int)k;
+                        
             for(int i = 0; i < k; i++){
-                table3.setValueAt(" >= "+cl.get(i),i+1,0);
-                table3.setValueAt(" - ",i+1,1);
-                table3.setValueAt(" - ",i+1,2);
+                table3.setValueAt(cl.get(i)+" - "+cl2.get(i),i+1,0);
+                
+                table3.setValueAt(tlcl.get(i)+" - "+tucl.get(i),i+1,1);
+                table3.setValueAt(midList.get(i),i+1,2);
                 table3.setValueAt(freq.get(i).size(),i+1,3);
                 table3.setValueAt(new DecimalFormat("#.##").format(freqPercent.get(i)),i+1,4);
                 table3.setValueAt(cfs.get(i),i+1,5);
                 table3.setValueAt(new DecimalFormat("#.##").format(cps.get(i)),i+1,6);
             }
+            table3.setValueAt(cl.get(a-1)+" above",a,0);
 
             JScrollPane scrollPane3 = new JScrollPane(table3);
             scrollPane3.setBorder(BorderFactory.createTitledBorder (title));
@@ -1003,8 +982,8 @@ public class Organizing {
             //frame4.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);                        
             JTable table4 = new JTable();    
             table4.setModel(new DefaultTableModel((int) (k + 2), 7));
-            table4.setValueAt("CLASS LIMIT", 0, 0);
-            table4.setValueAt("TRUE CLASS LIMIT", 0, 1);
+            table4.setValueAt("CLASS LIMITS", 0, 0);
+            table4.setValueAt("TRUE CLASS LIMITS", 0, 1);
             table4.setValueAt("MIDPOINTS", 0, 2);
             table4.setValueAt("FREQUENCY", 0, 3);
             table4.setValueAt("%", 0, 4);
@@ -1012,9 +991,11 @@ public class Organizing {
             table4.setValueAt("C%", 0, 6);
             table4.setValueAt("n = " + N, (int) (k + 1), 3);
             table4.setValueAt("TOTAL = 100%", (int) (k + 1), 4);
-
+            
+            int a = (int)k;
+            
             for(int i = 0; i < k; i++){
-                table4.setValueAt(" >= "+cl.get(i)+" and <= "+cl2.get(i),i+1,0);
+                table4.setValueAt(cl.get(i)+" - "+cl2.get(i),i+1,0);
                 table4.setValueAt(" - ",i+1,1);
                 table4.setValueAt(" - ",i+1,2);
                 table4.setValueAt(freq.get(i).size(),i+1,3);
@@ -1022,6 +1003,8 @@ public class Organizing {
                 table4.setValueAt(cfs.get(i),i+1,5);
                 table4.setValueAt(new DecimalFormat("#.##").format(cps.get(i)),i+1,6);
             }
+            table4.setValueAt("below "+cl2.get(0),1,0);
+            table4.setValueAt(cl.get(a-1)+" above",a,0);
 
             JScrollPane scrollPane4 = new JScrollPane(table4);
             scrollPane4.setBorder(BorderFactory.createTitledBorder (title));
@@ -1039,5 +1022,4 @@ public class Organizing {
 
 /* float.parseFloat(jTextField1.getText)
     jTectField4.setText(String.valueOf(result)
-
 */
