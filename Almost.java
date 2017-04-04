@@ -9,7 +9,8 @@ package organizing;
 //cf
 //c%
 
-
+//Aureo, Zauleck
+//in this mp, we used the built-in APIs for the histogram and pie chart as well as the tables
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -46,27 +47,16 @@ import org.jfree.data.xy.XYSeriesCollection;
 import org.jfree.data.statistics.*;
 import org.jfree.ui.RefineryUtilities;
 
-/**
- *
- * @author localuser
- */
-
-/** TODO PIE CHART
-**/
-
 
   
 public class Organizing {
     
-    
-    
-  
 
     /**
      * @param args the command line arguments
      */
     public static int N;
-    @SuppressWarnings("empty-statement")
+    
     public static void main(String[] args) {
         // TODO code application logic here
     Scanner sc = new Scanner(System.in);
@@ -91,17 +81,12 @@ public class Organizing {
             } 
             
             if(choice == 1){
-                
-                
-                
                 System.out.println("*** CATEGORICAL ***");
                 System.out.println();
                 System.out.println("TITLE(title of data set)");
                 //sc = new Scanner(System.in);
-                
-                
+               
                 title = s.nextLine();
-                
                 
                 System.out.println("this is the title  "+title);
                 
@@ -114,11 +99,7 @@ public class Organizing {
                 all = Stratified(a);
                 System.out.println("GROUPED DATA:  "+all);
                 System.out.println("size  "+all.size());
-                
-                
-                
-                
-                              
+                            
                 double percent = 0.0, sum = 0.0;
                 for(int i = 0; i < all.size(); i++){
                    
@@ -127,53 +108,72 @@ public class Organizing {
                     //System.out.println(inner);
                     
                     int inner_n = inner.size();
-                    
-                    
-                    
+                   
                     percent = GetPercentage(N, inner_n);
                     percentages.add(percent);
                     sum += percent;
                     System.out.println("" + inner.get(0) + "\t"+"        " + percent);
-                   
-                    
-                    
                 }
                  System.out.println("\t"+"total   "+ Math.ceil(sum));
-                 
-                 
                
                  System.out.println("all = "+all);
                  
-                 
-        JFrame frame = new JFrame();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);                        
-        JTable table = new JTable();    
-        table.setModel(new DefaultTableModel((int) (all.size() + 2),2));
-
-        table.setValueAt("VALUE LABELS", 0, 0);
-        table.setValueAt("PERCENTAGE", 0, 1);
-        
-        
-        table.setValueAt("TOTAL = 100%", (int) (all.size() + 1), 1);
-        
-        for(int i = 0; i < all.size(); i++){
-            table.setValueAt(all.get(i).get(0),i+1,0);
             
-            table.setValueAt(new DecimalFormat("#.##").format(percentages.get(i)),i+1,1);
-            
-        }
+            JFrame frame = new JFrame();
+            //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);                        
+            JTable table = new JTable();    
+            table.setModel(new DefaultTableModel((int) (all.size() + 2),2));
 
-        JScrollPane scrollPane = new JScrollPane(table);
-        scrollPane.setBorder(BorderFactory.createTitledBorder (title));
-        frame.add(scrollPane, BorderLayout.CENTER);
-        frame.setSize(300, 150);
-        frame.setVisible(true);     
-                 
- 
-               
+            table.setValueAt("VALUE LABELS", 0, 0);
+            table.setValueAt("PERCENTAGE", 0, 1);
+
+
+            table.setValueAt("TOTAL = 100%", (int) (all.size() + 1), 1);
+
+            for(int i = 0; i < all.size(); i++){
+                table.setValueAt(all.get(i).get(0),i+1,0);
+
+                table.setValueAt(new DecimalFormat("#.##").format(percentages.get(i)),i+1,1);
+
+            }
+
+            JScrollPane scrollPane = new JScrollPane(table);
+            scrollPane.setBorder(BorderFactory.createTitledBorder (title));
+            frame.add(scrollPane, BorderLayout.CENTER);
+            frame.setSize(300, 150);
+            frame.setVisible(true);     
+
+            
+            int type = 0, testT = 0;
+            String typeTest = "";
+            do{ 
+                System.out.println("GENERATE GRAPH?");
+                System.out.println("[1] YES");
+                System.out.println("[2] NO");     
+
+
+                System.out.println();
+                System.out.println("Please pick a number from the choices above.");
+
+                typeTest = sc.next();
+
+                if(IsNumber(typeTest)){
+                    testT = Convert(typeTest);
+                } else {                
+                    do{
+                        System.out.println("Please enter a number only.");
+                        typeTest = sc.next();
+                    } while (!IsNumber(typeTest));
+
+                    testT = Convert(typeTest);
+                }      
+                type = testT;
+            }while(type < 1 || type > 2);
+            
+            if (type == 1){   
                DefaultPieDataset dataset = new DefaultPieDataset( );
                for(int i = 0; i < all.size(); i++){
-                   dataset.setValue(all.get(i).get(0).toString()+" = "+percentages.get(i).toString()+"%",percentages.get(i));
+                   dataset.setValue(all.get(i).get(0).toString()+" = "+new DecimalFormat("#.##").format(percentages.get(i))+"%",percentages.get(i));
                }
                JFreeChart chart = ChartFactory.createPieChart(      
                 title,  // chart title 
@@ -188,6 +188,48 @@ public class Organizing {
                 l.setContentPane( chartPanel );
                 l.setSize(400, 400);
                 l.setVisible(true);
+                
+            }else{
+                //do nothing?
+            }
+            
+            
+            int type2 = 0, testT2 = 0;
+            String typeTest2 = "";
+            do{ 
+                System.out.println("REDISPLAY TABLE?");
+                System.out.println("[1] YES");
+                System.out.println("[2] NO");     
+
+
+                System.out.println();
+                System.out.println("Please pick a number from the choices above.");
+
+                typeTest2 = sc.next();
+
+                if(IsNumber(typeTest2)){
+                    testT2 = Convert(typeTest2);
+                } else {                
+                    do{
+                        System.out.println("Please enter a number only.");
+                        typeTest2 = sc.next();
+                    } while (!IsNumber(typeTest2));
+
+                    testT2 = Convert(typeTest2);
+                }      
+                type2 = testT2;
+            }while(type2 < 1 || type2 > 2);
+            
+            if (type2 == 1){   
+            
+            DisplayTable(all,percentages,title);    
+              
+            }else{
+                //do nothing?
+            }
+            
+            
+            
                                 
             } else if (choice == 2){
              
@@ -201,20 +243,32 @@ public class Organizing {
                 
                 ArrayList<Double> a = new ArrayList<>();
                 //ArrayList<ArrayList> all; 
-                //a = GetData2();
+                a = GetData2();
                 
                 
                 
-                double[] arr = {70, 36, 43, 69,82,48,34,62,35,15,
-                59,139,46,37,42,30,55,56,36,82,
-                38,89,54,25,35,24,22,9,55,19};
-                N = arr.length;
-                double t = 0.0;
-                for(int i = 0; i < N; i++){
-                    
-                    
-                    a.add(arr[i]);
-                }
+//                double[] arr = {70, 36, 43, 69,82,48,34,62,35,15,
+//                59,139,46,37,42,30,55,56,36,82,
+//                38,89,54,25,35,24,22,9,55,19};
+                
+                
+//                double[] arr = {112, 100, 127,120,134,118,105,110,109,112,
+//                110, 118, 117, 116, 118, 122, 114, 114, 105, 109,
+//                107, 112, 114, 115, 118, 117, 118, 122, 106, 110,
+//                116, 108, 110, 121, 113, 120, 119, 111, 104, 111,
+//                120, 113, 120, 117, 105, 110, 118, 112, 114, 114};
+//                
+                
+                
+                
+                
+//                N = arr.length;
+//                double t = 0.0;
+//                for(int i = 0; i < N; i++){
+//                    
+//                    
+//                    a.add(arr[i]);
+//                }
                
                 Collections.sort(a);
                 System.out.println("sorted a "+a);
@@ -243,7 +297,7 @@ public class Organizing {
                 
                 
                 ArrayList<Double> cl2 = new ArrayList<>();
-                double cl2min = cl.get(1);
+                double cl2min = cl.get(1) - 1;
                 cl2.add(cl2min);
                 for(int i = 1; i < k; i++){
                     cl2.add(cl2min+=width);
@@ -269,20 +323,20 @@ public class Organizing {
                 }
                 System.out.println("tlcl 1 "+tlcl);
                 System.out.println("tucl 2 "+tucl);
-                
+                System.out.println("N "+N);
                 
                 ArrayList<Double> midList = new ArrayList<>();
                 double mid = (cl.get(0) + cl2.get(0)) / 2;
                 midList.add(mid);
                 for(int i = 1; i <k; i++){
-                    midList.add(mid += width);
+                    midList.add((tlcl.get(i)+tucl.get(i))/2);
                 }
                 
                 for (int i = 0; i < k; i++){
                     System.out.println((tlcl.get(i)+tucl.get(i))/2);
                 }
                 
-                System.out.println(midList);
+                System.out.println("mid"+midList);
                 
                 ArrayList<ArrayList<Double>>  freq = new ArrayList<>();
                 
@@ -298,7 +352,7 @@ public class Organizing {
                 }
                     
                 ArrayList<Double>  freqSize = new ArrayList<>();
-                Double size = 0.0;
+                double size = 0.0;
                 for(int i = 0; i < k; i++){
                     size = (double) freq.get(i).size();
                     freqSize.add(size);
@@ -311,20 +365,20 @@ public class Organizing {
                 }
                 
                 ArrayList<Double> cfs = new ArrayList<>();
-                Double cf = freqSize.get(0);
+                double cf = freqSize.get(0);
                 cfs.add(cf);
                 for(int i = 1; i < k; i++){
-                    cf += freqSize.get(i);
+                    cf = freqSize.get(i) + cfs.get(i-1);
                     cfs.add(cf);
                 }
                 
-                Double sum = 0.0;
-                for (int i = 0; i < cfs.size(); i++){
+                double sum = 0.0;
+                for (int i = 1; i < cfs.size(); i++){
                     sum+= cfs.get(i);
                 }
                 
                 ArrayList<Double> cps = new ArrayList<>();
-                Double cp = 0.0;
+                double cp = 0.0;
                 for (int i = 0; i < k; i++){
                     cp = (cfs.get(i)/N) * 100;
                     cps.add(cp);
@@ -378,9 +432,6 @@ public class Organizing {
                             "\t"+new DecimalFormat("#.##").format(cps.get(i)));
                 }
                 
-                
-                
-                
                    
                 System.out.println("CLASS LIMITS"+"\t"+"T CLASS LIMITS"+"\t"+"MID"+"\t"+"FREQ"+"\t"+"PERCENT"+"\t"+"CF"+"\t"+"CP");
                 for(int i = 0; i < k; i++){
@@ -393,148 +444,84 @@ public class Organizing {
                             "\t"+new DecimalFormat("#.##").format(cps.get(i)));
                 }
                 
-        JFrame frame = new JFrame();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);                        
-        JTable table = new JTable();    
-        table.setModel(new DefaultTableModel((int) (k + 2), 7));
-
-        table.setValueAt("CLASS LIMIT", 0, 0);
-        table.setValueAt("TRUE CLASS LIMIT", 0, 1);
-        table.setValueAt("MIDPOINTS", 0, 2);
-        table.setValueAt("FREQUENCY", 0, 3);
-        table.setValueAt("%", 0, 4);
-        table.setValueAt("CF", 0, 5);
-        table.setValueAt("C%", 0, 6);
-        table.setValueAt("n = " + N, (int) (k + 1), 3);
-        table.setValueAt("TOTAL = 100%", (int) (k + 1), 4);
-        
-        for(int i = 0; i < k; i++){
-            table.setValueAt(cl.get(i)+" - "+cl2.get(i),i+1,0);
-            table.setValueAt(tlcl.get(i)+" - "+tucl.get(i),i+1,1);
-            table.setValueAt(midList.get(i),i+1,2);
-            table.setValueAt(freq.get(i).size(),i+1,3);
-            table.setValueAt(new DecimalFormat("#.##").format(freqPercent.get(i)),i+1,4);
-            table.setValueAt(cfs.get(i),i+1,5);
-            table.setValueAt(new DecimalFormat("#.##").format(cps.get(i)),i+1,6);
-        }
-
-        JScrollPane scrollPane = new JScrollPane(table);
-        scrollPane.setBorder(BorderFactory.createTitledBorder (title));
-        frame.add(scrollPane, BorderLayout.CENTER);
-        frame.setSize(300, 150);
-        frame.setVisible(true);
-        
-        
-        
-        JFrame frame2 = new JFrame();
-        frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);                        
-        JTable table2 = new JTable();    
-        table2.setModel(new DefaultTableModel((int) (k + 2), 7));
-
-        table2.setValueAt("CLASS LIMIT", 0, 0);
-        table2.setValueAt("TRUE CLASS LIMIT", 0, 1);
-        table2.setValueAt("MIDPOINTS", 0, 2);
-        table2.setValueAt("FREQUENCY", 0, 3);
-        table2.setValueAt("%", 0, 4);
-        table2.setValueAt("CF", 0, 5);
-        table2.setValueAt("C%", 0, 6);
-        table2.setValueAt("n = " + N, (int) (k + 1), 3);
-        table2.setValueAt("TOTAL = 100%", (int) (k + 1), 4);
-        
-        for(int i = 0; i < k; i++){
-            table2.setValueAt(" <= "+cl2.get(i),i+1,0);
-            table2.setValueAt(" - ",i+1,1);
-            table2.setValueAt(" - ",i+1,2);
-            table2.setValueAt(freq.get(i).size(),i+1,3);
-            table2.setValueAt(new DecimalFormat("#.##").format(freqPercent.get(i)),i+1,4);
-            table2.setValueAt(cfs.get(i),i+1,5);
-            table2.setValueAt(new DecimalFormat("#.##").format(cps.get(i)),i+1,6);
-        }
-
-        JScrollPane scrollPane2 = new JScrollPane(table2);
-        
-        scrollPane2.setBorder(BorderFactory.createTitledBorder (title));
-        frame2.add(scrollPane2, BorderLayout.CENTER);
-        frame2.setSize(300, 150);
-        frame2.setVisible(true);
-        
-        
-        
-        JFrame frame3 = new JFrame();
-        frame3.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);                        
-        JTable table3 = new JTable();    
-        table3.setModel(new DefaultTableModel((int) (k + 2), 7));
-
-        table3.setValueAt("CLASS LIMIT", 0, 0);
-        table3.setValueAt("TRUE CLASS LIMIT", 0, 1);
-        table3.setValueAt("MIDPOINTS", 0, 2);
-        table3.setValueAt("FREQUENCY", 0, 3);
-        table3.setValueAt("%", 0, 4);
-        table3.setValueAt("CF", 0, 5);
-        table3.setValueAt("C%", 0, 6);
-        table3.setValueAt("n = " + N, (int) (k + 1), 3);
-        table3.setValueAt("TOTAL = 100%", (int) (k + 1), 4);
-        
-        for(int i = 0; i < k; i++){
-            table3.setValueAt(" >= "+cl.get(i),i+1,0);
-            table3.setValueAt(" - ",i+1,1);
-            table3.setValueAt(" - ",i+1,2);
-            table3.setValueAt(freq.get(i).size(),i+1,3);
-            table3.setValueAt(new DecimalFormat("#.##").format(freqPercent.get(i)),i+1,4);
-            table3.setValueAt(cfs.get(i),i+1,5);
-            table3.setValueAt(new DecimalFormat("#.##").format(cps.get(i)),i+1,6);
-        }
-
-        JScrollPane scrollPane3 = new JScrollPane(table3);
-        scrollPane3.setBorder(BorderFactory.createTitledBorder (title));
-        frame3.add(scrollPane3, BorderLayout.CENTER);
-        
-        frame3.setSize(300, 150);
-        frame3.setVisible(true);
-        
-        
-        JFrame frame4 = new JFrame();
-        frame4.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);                        
-        JTable table4 = new JTable();    
-        table4.setModel(new DefaultTableModel((int) (k + 2), 7));
-        table4.setValueAt("CLASS LIMIT", 0, 0);
-        table4.setValueAt("TRUE CLASS LIMIT", 0, 1);
-        table4.setValueAt("MIDPOINTS", 0, 2);
-        table4.setValueAt("FREQUENCY", 0, 3);
-        table4.setValueAt("%", 0, 4);
-        table4.setValueAt("CF", 0, 5);
-        table4.setValueAt("C%", 0, 6);
-        table4.setValueAt("n = " + N, (int) (k + 1), 3);
-        table4.setValueAt("TOTAL = 100%", (int) (k + 1), 4);
-        
-        for(int i = 0; i < k; i++){
-            table4.setValueAt(" >= "+cl.get(i)+" and <= "+cl2.get(i),i+1,0);
-            table4.setValueAt(" - ",i+1,1);
-            table4.setValueAt(" - ",i+1,2);
-            table4.setValueAt(freq.get(i).size(),i+1,3);
-            table4.setValueAt(new DecimalFormat("#.##").format(freqPercent.get(i)),i+1,4);
-            table4.setValueAt(cfs.get(i),i+1,5);
-            table4.setValueAt(new DecimalFormat("#.##").format(cps.get(i)),i+1,6);
-        }
-
-        JScrollPane scrollPane4 = new JScrollPane(table4);
-        scrollPane4.setBorder(BorderFactory.createTitledBorder (title));
-        frame4.add(scrollPane4, BorderLayout.CENTER);
-        
-        frame4.setSize(300, 150);
-        frame4.setVisible(true);
-  
-               
-               
                 
+                    
+                 
+            DisplayTables(k, cl, cl2,
+                            tlcl,tucl,midList,freq,
+                            freqPercent, cfs, cps,  title );  
                
-                
+            int type = 0, testT = 0;
+            String typeTest = "";
+            do{
+            do{ 
+               
+               
+                System.out.println("GENERATE GRAPH?");
+                System.out.println("[1] YES");
+                System.out.println("[2] NO");     
+                System.out.println();
+                System.out.println("Please pick a number from the choices above.");
+
+                typeTest = sc.next();
+
+                if(IsNumber(typeTest)){
+                    testT = Convert(typeTest);
+                } else {                
+                    do{
+                        System.out.println("Please enter a number only.");
+                        typeTest = sc.next();
+                    } while (!IsNumber(typeTest));
+
+                    testT = Convert(typeTest);
+                }      
+                type = testT;
+            }while(type < 1 || type > 2);
+            
+            if (type == 1){                   
                 int bins = (int) k;
                 System.out.println("You may input a label for your X axis:");
                 String x = "";
                 x = s.nextLine();
                 createHistogram(a,bins,title,x);
-                
+                      
+                int type2 = 0, testT2 = 0;
+                String typeTest2 = "";
+                do{ 
+                System.out.println("REDISPLAY TABLE?");
+                System.out.println("[1] YES");
+                System.out.println("[2] NO");     
+                System.out.println();
+                System.out.println("Please pick a number from the choices above.");
+
+                typeTest2 = sc.next();
+
+                if(IsNumber(typeTest2)){
+                    testT2 = Convert(typeTest2);
+                } else {                
+                    do{
+                        System.out.println("Please enter a number only.");
+                        typeTest2 = sc.next();
+                    } while (!IsNumber(typeTest2));
+
+                    testT2 = Convert(typeTest2);
+                }      
+                type2 = testT2;
+            }while( (type2 < 1 || type2 > 2) && type != 2);
+            
+            if (type2 == 1){  
+               
+                DisplayTables(k, cl, cl2,
+                            tlcl,tucl,midList,freq,
+                            freqPercent, cfs, cps,  title );
+
+                }else{
+                    //do nothing?
+                }
+            }
+            }while(type!=2);
+            
+               
                 
             } else if(choice == 3){
                 System.out.println("*** QUIT ***");
@@ -578,6 +565,7 @@ public class Organizing {
     public static ArrayList GetData(){
         N = 0;
         
+        
         ArrayList list = new ArrayList<>();        
         Scanner sc = new Scanner(System.in);
         String testN = "";
@@ -601,16 +589,43 @@ public class Organizing {
             N = population;
         }while(N <= 1);
         
+               int type = 0, testT = 0;
+        String typeTest = "";
+                
+        do{ 
+            System.out.println();
+            System.out.println("** INPUT OPTIONS **");           
+            System.out.println("[1] Numeric");
+            System.out.println("[2] Alphabetic Character ");
+            System.out.println("[3] String");
+            
+            System.out.println();
+            System.out.println("Please pick a number from the choices above.");
+            
+            typeTest = sc.next();
+            
+            if(IsNumber(typeTest)){
+                testT = Convert(typeTest);
+            } else {                
+                do{
+                    System.out.println("Please enter a number only.");
+                    typeTest = sc.next();
+                } while (!IsNumber(typeTest));
+                
+                testT = Convert(typeTest);
+            }      
+            type = testT;
+        }while(type < 1 || type > 3);
         
-        for(int i = 1; i <= N; i++){
-                String test = "";  
-                Scanner j = new Scanner(System.in);
-                 System.out.print("["+i+"]" +" ");                    
-                    Object member;
-                    member = j.nextLine();
-                    test = member.toString();  
-                    
-               /* do{                     
+        if(type == 1){
+            System.out.println();
+            System.out.println("ENTER MEMBERS OF THE SAMPLING FRAME: ");
+            sc.nextLine();
+            System.out.println("Numbers only");
+            
+            for(int i = 1; i <= N; i++){
+                String test = "";               
+                do{                     
                     System.out.print("["+i+"]" +" ");                    
                     Object member = sc.next();
                     test = member.toString();                    
@@ -618,9 +633,45 @@ public class Organizing {
                         System.out.println("Oops. Numbers only");
                     }
                 }while (!IsNumber(test));
-                       */
+
                 list.add(test);         
             }
+        } else if (type == 2) {
+            System.out.println();
+            System.out.println("ENTER MEMBERS OF THE SAMPLING FRAME: ");
+            sc.nextLine();
+            System.out.println("Alphabetic Characters only");
+            for(int i = 1; i <= N; i++){
+                String test;               
+                do{                     
+                    System.out.print("["+i+"]" +" ");                    
+                    Object member = sc.next();
+                    test = member.toString();                    
+                    if(IsNumber(test)){
+                        System.out.println("Oops. Characters only");
+                    } else if (test.length() > 1){
+                        System.out.println("Oops. We only accept one character");
+                    } else if (test.charAt(0) >= 'A' && test.charAt(0) <= 'Z'){
+                        System.out.println("Oops. We accept lowercase only");
+                    }
+                }while (IsNumber(test) || test.length() > 1 || (test.charAt(0) >= 'A' && test.charAt(0) <= 'Z'));
+
+                list.add(test);         
+            }            
+        } else {
+             for(int i = 1; i <= N; i++){
+                String test = "";  
+                Scanner j = new Scanner(System.in);
+                System.out.print("["+i+"]" +" ");                    
+                Object member;
+                member = j.nextLine();
+                test = member.toString();                 
+                list.add(test);         
+            }
+            
+        }
+         
+     
         System.out.println("this is the list"+list);
         return list;
     }
@@ -729,18 +780,12 @@ public class Organizing {
                     
                 }  
     }
-    
-    
-    
-   
-    public static double GetRange(double min, double max){
-        
+  
+    public static double GetRange(double min, double max){        
         return max - min;
         
     }
-    
-    
-    
+   
     public static JFreeChart createHistogram(ArrayList doubleMatrix, int width, String title, String label){
 
         // Generate a one dimensional array of the size w*h of the double matrix
@@ -756,8 +801,7 @@ public class Organizing {
                     System.out.println(value);
             }
         
-
-        double[] data = new double[dataArrayList.size()];
+      double[] data = new double[dataArrayList.size()];
 
         for(int p = 0; p < dataArrayList.size();p++)
              data[p] = dataArrayList.get(p);
@@ -765,8 +809,6 @@ public class Organizing {
 
        // int number = data.length;
         HistogramDataset dataset = new HistogramDataset();
-        
-        
         
         dataset.setType(HistogramType.FREQUENCY);
         dataset.addSeries("Hist",data,width); 
@@ -791,7 +833,206 @@ public class Organizing {
        
         return chart;
     }
+    
+    
+    public static void DisplayTable(ArrayList<ArrayList> all, ArrayList percentages, String title){
+        JFrame frame = new JFrame();
+            //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);                        
+            JTable table = new JTable();    
+            table.setModel(new DefaultTableModel((int) (all.size() + 2),2));
+
+            table.setValueAt("VALUE LABELS", 0, 0);
+            table.setValueAt("PERCENTAGE", 0, 1);
+
+
+            table.setValueAt("TOTAL = 100%", (int) (all.size() + 1), 1);
+
+            for(int i = 0; i < all.size(); i++){
+                table.setValueAt(all.get(i).get(0),i+1,0);
+
+                table.setValueAt(new DecimalFormat("#.##").format(percentages.get(i)),i+1,1);
+
+            }
+
+            JScrollPane scrollPane = new JScrollPane(table);
+            scrollPane.setBorder(BorderFactory.createTitledBorder (title));
+            frame.add(scrollPane, BorderLayout.CENTER);
+            frame.setSize(300, 150);
+            frame.setVisible(true);
+    }
+    
+    
+    public static void DisplayTables(double k, ArrayList<Double> cl, ArrayList<Double> cl2,
+            ArrayList<Double> tlcl,ArrayList<Double> tucl,ArrayList<Double> midList,ArrayList<ArrayList<Double>> freq,
+            ArrayList<Double>  freqPercent, ArrayList<Double> cfs, ArrayList<Double> cps, String title ){
         
+     JFrame frame = new JFrame();
+        //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);                        
+        JTable table = new JTable();    
+        table.setModel(new DefaultTableModel((int) (k + 2), 7));
+
+        table.setValueAt("CLASS LIMIT", 0, 0);
+        table.setValueAt("TRUE CLASS LIMIT", 0, 1);
+        table.setValueAt("MIDPOINTS", 0, 2);
+        table.setValueAt("FREQUENCY", 0, 3);
+        table.setValueAt("%", 0, 4);
+        table.setValueAt("CF", 0, 5);
+        table.setValueAt("C%", 0, 6);
+        table.setValueAt("n = " + N, (int) (k + 1), 3);
+        table.setValueAt("TOTAL = 100%", (int) (k + 1), 4);
+        
+        for(int i = 0; i < k; i++){
+            table.setValueAt(cl.get(i)+" - "+cl2.get(i),i+1,0);
+            table.setValueAt(tlcl.get(i)+" - "+tucl.get(i),i+1,1);
+            table.setValueAt(midList.get(i),i+1,2);
+            table.setValueAt(freq.get(i).size(),i+1,3);
+            table.setValueAt(new DecimalFormat("#.##").format(freqPercent.get(i)),i+1,4);
+            table.setValueAt(cfs.get(i),i+1,5);
+            table.setValueAt(new DecimalFormat("#.##").format(cps.get(i)),i+1,6);
+        }
+
+        JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.setBorder(BorderFactory.createTitledBorder (title));
+        frame.add(scrollPane, BorderLayout.CENTER);
+        frame.setSize(300, 150);
+        frame.setVisible(true);
+        
+        Scanner sc = new Scanner(System.in);
+        
+        int type = 0, testT = 0;
+            String typeTest = "";
+            do{ 
+                
+                System.out.println(); 
+                System.out.println("COLLAPSE CLASS LIMITS?");
+                System.out.println("[1] COLLAPSE LOWER CLASS LIMIT");
+                System.out.println("[2] COLLAPSE UPPPER CLASS LIMIT");    
+                System.out.println("[3] COLLAPSE BOTH");  
+                System.out.println("[4] DON'T COLLAPSE");  
+
+
+                System.out.println();
+                System.out.println("Please pick a number from the choices above.");
+
+                typeTest = sc.next();
+
+                if(IsNumber(typeTest)){
+                    testT = Convert(typeTest);
+                } else {                
+                    do{
+                        System.out.println("Please enter a number only.");
+                        typeTest = sc.next();
+                    } while (!IsNumber(typeTest));
+
+                    testT = Convert(typeTest);
+                }      
+                type = testT;
+            }while(type < 1 || type > 4);
+        
+        if (type == 1){
+        
+            JFrame frame2 = new JFrame();
+            //frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);                        
+            JTable table2 = new JTable();    
+            table2.setModel(new DefaultTableModel((int) (k + 2), 7));
+
+            table2.setValueAt("CLASS LIMIT", 0, 0);
+            table2.setValueAt("TRUE CLASS LIMIT", 0, 1);
+            table2.setValueAt("MIDPOINTS", 0, 2);
+            table2.setValueAt("FREQUENCY", 0, 3);
+            table2.setValueAt("%", 0, 4);
+            table2.setValueAt("CF", 0, 5);
+            table2.setValueAt("C%", 0, 6);
+            table2.setValueAt("n = " + N, (int) (k + 1), 3);
+            table2.setValueAt("TOTAL = 100%", (int) (k + 1), 4);
+
+            for(int i = 0; i < k; i++){
+                table2.setValueAt(" <= "+cl2.get(i),i+1,0);
+                table2.setValueAt(" - ",i+1,1);
+                table2.setValueAt(" - ",i+1,2);
+                table2.setValueAt(freq.get(i).size(),i+1,3);
+                table2.setValueAt(new DecimalFormat("#.##").format(freqPercent.get(i)),i+1,4);
+                table2.setValueAt(cfs.get(i),i+1,5);
+                table2.setValueAt(new DecimalFormat("#.##").format(cps.get(i)),i+1,6);
+            }
+
+            JScrollPane scrollPane2 = new JScrollPane(table2);
+
+            scrollPane2.setBorder(BorderFactory.createTitledBorder (title));
+            frame2.add(scrollPane2, BorderLayout.CENTER);
+            frame2.setSize(300, 150);
+            frame2.setVisible(true);
+        
+        } else if (type == 2){
+        
+            JFrame frame3 = new JFrame();
+            //frame3.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);                        
+            JTable table3 = new JTable();    
+            table3.setModel(new DefaultTableModel((int) (k + 2), 7));
+
+            table3.setValueAt("CLASS LIMIT", 0, 0);
+            table3.setValueAt("TRUE CLASS LIMIT", 0, 1);
+            table3.setValueAt("MIDPOINTS", 0, 2);
+            table3.setValueAt("FREQUENCY", 0, 3);
+            table3.setValueAt("%", 0, 4);
+            table3.setValueAt("CF", 0, 5);
+            table3.setValueAt("C%", 0, 6);
+            table3.setValueAt("n = " + N, (int) (k + 1), 3);
+            table3.setValueAt("TOTAL = 100%", (int) (k + 1), 4);
+
+            for(int i = 0; i < k; i++){
+                table3.setValueAt(" >= "+cl.get(i),i+1,0);
+                table3.setValueAt(" - ",i+1,1);
+                table3.setValueAt(" - ",i+1,2);
+                table3.setValueAt(freq.get(i).size(),i+1,3);
+                table3.setValueAt(new DecimalFormat("#.##").format(freqPercent.get(i)),i+1,4);
+                table3.setValueAt(cfs.get(i),i+1,5);
+                table3.setValueAt(new DecimalFormat("#.##").format(cps.get(i)),i+1,6);
+            }
+
+            JScrollPane scrollPane3 = new JScrollPane(table3);
+            scrollPane3.setBorder(BorderFactory.createTitledBorder (title));
+            frame3.add(scrollPane3, BorderLayout.CENTER);
+
+            frame3.setSize(300, 150);
+            frame3.setVisible(true);
+        }
+        
+        else if (type == 3){
+            JFrame frame4 = new JFrame();
+            //frame4.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);                        
+            JTable table4 = new JTable();    
+            table4.setModel(new DefaultTableModel((int) (k + 2), 7));
+            table4.setValueAt("CLASS LIMIT", 0, 0);
+            table4.setValueAt("TRUE CLASS LIMIT", 0, 1);
+            table4.setValueAt("MIDPOINTS", 0, 2);
+            table4.setValueAt("FREQUENCY", 0, 3);
+            table4.setValueAt("%", 0, 4);
+            table4.setValueAt("CF", 0, 5);
+            table4.setValueAt("C%", 0, 6);
+            table4.setValueAt("n = " + N, (int) (k + 1), 3);
+            table4.setValueAt("TOTAL = 100%", (int) (k + 1), 4);
+
+            for(int i = 0; i < k; i++){
+                table4.setValueAt(" >= "+cl.get(i)+" and <= "+cl2.get(i),i+1,0);
+                table4.setValueAt(" - ",i+1,1);
+                table4.setValueAt(" - ",i+1,2);
+                table4.setValueAt(freq.get(i).size(),i+1,3);
+                table4.setValueAt(new DecimalFormat("#.##").format(freqPercent.get(i)),i+1,4);
+                table4.setValueAt(cfs.get(i),i+1,5);
+                table4.setValueAt(new DecimalFormat("#.##").format(cps.get(i)),i+1,6);
+            }
+
+            JScrollPane scrollPane4 = new JScrollPane(table4);
+            scrollPane4.setBorder(BorderFactory.createTitledBorder (title));
+            frame4.add(scrollPane4, BorderLayout.CENTER);
+
+            frame4.setSize(300, 150);
+            frame4.setVisible(true);
+        } else{
+            
+        }
+    }
 }
 
 
