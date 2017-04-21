@@ -4,6 +4,8 @@ Descriptive Statistics
 2. Ungrouped Data
 3. Quit
 
+***GROUPED DATA***
+
 -asks for input
 1. integer only
 2. floating point only
@@ -32,7 +34,31 @@ loop until user chooses continue{
       4. no modal class
       
     4. all
-      
-      
 }
+
+***UNGROUPED DATA***
+Total Number of class intervals (K):
+Open-ended class intervals
+1. Yes
+2. No
+
+If yes. which?
+1. First
+2. Last
+3. Both
+
+-user enters class limits
+1. Lower class limits
+2. Upper class limits
+3. frequency
+
+1. Continue
+2. Edit
+
+
+
+
+
+
+
 
