@@ -1,0 +1,38 @@
+MENU
+Descriptive Statistics
+1. Grouped Data
+2. Ungrouped Data
+3. Quit
+
+-asks for input
+1. integer only
+2. floating point only
+
+-enter total number of items
+-check for validation
+
+-displays [indexed] data with heading [description] - prompt the user for description 
+
+-asks if user wishes to edit data
+
+
+loop until user chooses continue{
+1. Continue
+2. Edit
+  if edit, proceed to edit
+  
+  else (user chose Continue) 
+    display accordingly [radio button]
+    1. Mean
+    2. Median
+    3. Mode
+      1. unimodal
+      2. bimodal
+      3. multimodal
+      4. no modal class
+      
+    4. all
+      
+      
+}
+
