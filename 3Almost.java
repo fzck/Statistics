@@ -60,19 +60,22 @@ public class Descriptive {
                 System.out.println("*** UNGROUPED DATA ***");
                 
                 ArrayList a = new ArrayList<>();
-                a = GetData();
-//                  double[] arr = {70, 36, 43, 69,82,48,34,62,35,15,
-//                59,139,46,37,42,30,55,56,36,82,
-//                38,89,54,25,35,24,22,9,55,19};
-//                
-//                //ArrayList a = new ArrayList<>();
-//                for (int i = 0; i < arr.length; i++ ){
-//                    a.add(arr[i]);
-//                }
+                //a = GetData();
+                  double[] arr = {70, 36, 43, 69,82,48,34,62,35,15,
+                59,139,46,37,42,30,55,56,36,82,
+                38,89,54,25,35,24,22,9,55,19};
                 
-                System.out.println(getMean(a));
-                System.out.println(getMedian(a));
-                System.out.println(getMode(a));
+                //ArrayList a = new ArrayList<>();
+                for (int i = 0; i < arr.length; i++ ){
+                    a.add(arr[i]);
+                }
+                
+                //System.out.println(getMean(a));
+                //System.out.println(getMedian(a));
+                getMean(a);
+                getMedian(a);
+                System.out.println("Mode = "+ getMode(a));
+                
                 
                 
                                 
@@ -589,12 +592,12 @@ public class Descriptive {
      
       
         
-     public static double getMean(ArrayList al){
+     public static void getMean(ArrayList al){
         double sum = 0.0;
         for(int i = 0; i < al.size(); i++){
             sum += Double.parseDouble(al.get(i).toString());
         }
-        System.out.println(sum/al.size());
+        
         
         double temp = 0;
         double mean = sum/al.size();
@@ -606,18 +609,19 @@ public class Descriptive {
             temp += (mean-a)*(mean-a);
         }
         double variance = temp/(v.size()-1);
+        System.out.println("Mean = "+mean);
         System.out.println("Variance = "+variance);
         System.out.println("SD = "+Math.sqrt(variance));
         
         
         
-        return sum/al.size();
+        //return sum/al.size();
     }
      
-     private static double getMedian(ArrayList arr){
-        Collections.sort(arr);
+     private static void getMedian(ArrayList arr){
+        //Collections.sort(arr);
         
-        System.out.println("SORTED"+arr);
+        
         ArrayList<Double> d = new ArrayList<>();
         
         for (int i = 0; i < arr.size(); i++){
@@ -625,12 +629,18 @@ public class Descriptive {
         }
         
         Collections.sort(d);
+        System.out.println("SORTED"+d);
         int n = d.size();
         double mid = 0.0;
 
         if (n % 2 == 0){
-            double a = d.get(n/2);
-            double b = d.get((n+2)/2);
+            double a = d.get(n/2)-1;
+            double b = d.get(((n+2)/2)-1);
+            //System.out.println((n/2)- 1);
+            //System.out.println(((n+2)/2) - 1);
+            //System.out.println(a);
+            //System.out.println(b);
+            
             mid = (a + b)/2;
         } 
         else{
@@ -642,7 +652,7 @@ public class Descriptive {
         
         System.out.println("Range = "+ Math.abs((d.get(arr.size()-1)) - ((d.get(0)) )));
         
-        return mid;   
+        //return mid;   
         
         
     }
