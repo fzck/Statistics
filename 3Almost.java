@@ -387,18 +387,72 @@ public class Descriptive {
             frame.add(scrollPane, BorderLayout.CENTER);
             frame.setSize(300, 150);
             frame.setVisible(true);
+            
+            
+            ArrayList <Integer> mox = new ArrayList<>();
 
                 double max_value  = -1;
                 int max_index = -1;
                 for(int i = 0 ; i < N ; i++ ){
-                if(max_value < f.get(i)){
+                if(max_value <= f.get(i)){
+                    //System.out.println("Compare" +f.get(i));
                     max_value = f.get(i);
                     max_index = i;
+                    //System.out.println("max_index"+max_index);
+                    //System.out.println("max_value"+max_value);
                 }
+               // mox.add(max_index);
 
             }
-            System.out.println("Mode"+table.getValueAt(max_index, 0).toString());
+            //    System.out.println(mox);
+            //if(mox.size() != 0){
                 
+            //    for(int i = 0; i < mox.size(); i++)
+                    double mode = max_value;
+                    System.out.println("Mode = "+mode);
+                    int ctr = 0;
+                    System.out.println("Modal class/es");
+                    for(int i = 0; i < N; i++){
+                        if(f.get(i) == mode){
+                            System.out.println(up.get(i)+"-"+low.get(i));
+                            ctr++;
+                        }
+                    }
+                    if (ctr == 1){
+                        System.out.println("unimodal");
+                    } else if (ctr == 2){
+                        System.out.println("bimodal");
+                    } else if (ctr == 3){
+                        System.out.println("multimodal");
+                    } else {
+                       System.out.println("no mode");
+                    }
+                    
+                    
+//            } else {
+//                System.out.println("no modal class");
+//            }  
+            
+            
+            /*
+            ArrayList <ArrayList> grouped = Stratified(f);
+            Collections.sort(f);
+            System.out.println(grouped);
+            
+            System.out.println("Mode");
+            
+            int max = (int) grouped.get(0).get(0);
+            System.out.println(max);
+            /*
+            for(int i = 0; i < grouped.size(); i++){
+                if(grouped.get(i+1).size() >= max){
+                    max = grouped.get(i+1).size();
+                }
+                
+            }
+                    */
+                    
+                    
             } else if (choice > 3 || choice < 3){
                 System.out.println("INVALID INPUT");
             }
@@ -653,9 +707,33 @@ public class Descriptive {
         System.out.println("Range = "+ Math.abs((d.get(arr.size()-1)) - ((d.get(0)) )));
         
         //return mid;   
-        
-        
+            
     }
+     
+     public static ArrayList<ArrayList> Stratified (ArrayList ungrouped){        
+        ArrayList<ArrayList> grouped = new ArrayList<>();        
+        boolean[] isVisited = new boolean[ungrouped.size()];
+        
+        for(int i = 0; i < ungrouped.size(); i++){         
+            if(!(isVisited[i])){
+                Object current = ungrouped.get(i);
+                grouped.add( new ArrayList() );
+                ArrayList currList = grouped.get(grouped.size() - 1);
+                currList.add(current);
+
+                for(int j = i+1; j < ungrouped.size(); j++){
+                    Object next = ungrouped.get(j);
+                    if(next.equals(current)){
+                        isVisited[j] = true;
+                        currList.add(next);
+                    }
+                }
+            }
+        }
+        return grouped;        
+    }
+     
+     
       public static ArrayList<Double> getMode(ArrayList al){
         
         ArrayList<Double> d = new ArrayList<>();
@@ -715,6 +793,9 @@ public class Descriptive {
             
             return modes;
         }
+        
+        
+        
     }
    
       
