@@ -10,6 +10,12 @@ package descriptive;
  * @author localuser
  */
 
+//median
+//todo collapse
+//edit
+//loop
+
+
 import java.awt.BorderLayout;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
